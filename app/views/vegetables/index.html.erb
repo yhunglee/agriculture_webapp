@@ -1,0 +1,37 @@
+<h1> This page is overview for vegetables. </h1>
+
+<%= include_gon(:init => true) %>
+<%= form_tag root_url, :method => 'get' do %>
+	<p>
+		<%= text_field_tag :query, params[:query] %>
+		<%= submit_tag "Search", :name => nil %>
+	</p>
+<% end %>
+<div id="chart">
+</div>
+<%= javascript_include_tag "vegetables" %>
+
+<%= paginate @vegetables %>
+<%= page_entries_info @vegetables %>
+<div id="css_table">
+	<div class="css_tr"> 
+		<div class="css_td">Name</div> 
+		<div class="css_td">Code</div> 
+		<div class="css_td">Date</div>
+		<div class="css_td">Total average price(NTD)</div>
+		<div class="css_td">Total transaction quantity</div>
+	</div>
+	<% i = 1 %>
+	<% @vegetables.each{ |item| %>
+		<div class="css_tr">
+			<div class="css_td"><div id="itemname-<%= i %>"><%= item.name %></div></div>
+			<div class="css_td"><div id="itemcode-<%= i %>"><%= item.code %></div></div>
+			<div class="css_td"><div id="itemdate-<%= i %>"><%= item.date %></div></div>
+			<div class="css_td"><div id="itemtotalaverageprice-<%= i %>"><%= item.total_average_price %></div></div>
+			<div class="css_td"><div id="itemtotaltransactionquantity-<%= i %>"><%= item.total_transaction_quantity %></div></div>
+		</div>	
+		<% i += 1 %>
+	<% } %>
+</div>
+<%= page_entries_info @vegetables %>
+<%= paginate @vegetables %>
