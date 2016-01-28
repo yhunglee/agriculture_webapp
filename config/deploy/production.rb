@@ -11,6 +11,10 @@
 
 # role-based syntax
 # ==================
+role :app, %w{agriappuser@agriculture.csie.io}
+role :web, %w{agriappuser@agriculture.csie.io}
+role :db, %w{agriappuser@agriculture.csie.io}
+
 
 # Defines a role with one or multiple servers. The primary server in each
 # group is considered to be the first unless any  hosts have the primary
