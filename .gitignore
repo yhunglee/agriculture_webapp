@@ -17,4 +17,7 @@
 
 # Ignore config/database.yml and config/secrets.yml
 /config/database.yml
+/config/database.yml.example
 /config/secrets.yml
+/config/secrets.yml.example
+
