@@ -6,8 +6,8 @@ module API
 		format :json
 		version 'v1', using: :path
 
-		mount V1::SpecifiedVegetables
-		mount V1::OverviewVegetables
+		mount API::V1::SpecifiedVegetables
+		mount API::V1::OverviewVegetables
 
 		#before do
 		#	doorkeeper_authorize!
