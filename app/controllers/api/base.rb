@@ -1,6 +1,6 @@
 require 'doorkeeper/grape/helpers'
-
-class Base < Grape::API
+module API
+	class Base < Grape::API
 	helpers Doorkeeper::Grape::Helpers
 
 	format :json
@@ -12,4 +12,5 @@ class Base < Grape::API
 	#before do
 	#	doorkeeper_authorize!
 	#end
+	end
 end
