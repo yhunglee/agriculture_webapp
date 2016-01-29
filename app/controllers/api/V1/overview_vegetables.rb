@@ -1,6 +1,4 @@
 require 'doorkeeper/grape/helpers'
-module API
-	module V1
 		class OverviewVegetables < Grape::API
 			format :json
 			default_format :json
@@ -38,5 +36,3 @@ module API
 
 			end
 		end 
-	end
-end
