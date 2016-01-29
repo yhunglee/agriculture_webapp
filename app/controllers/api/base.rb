@@ -1,15 +1,17 @@
 require 'doorkeeper/grape/helpers'
 
-class Base < Grape::API
-	helpers Doorkeeper::Grape::Helpers
+module API
+	class Base < Grape::API
+		helpers Doorkeeper::Grape::Helpers
 
-	format :json
-	version 'v1', using: :path
+		format :json
+		version 'v1', using: :path
 
-	mount V1::SpecifiedVegetables
-	mount V1::OverviewVegetables
+		mount V1::SpecifiedVegetables
+		mount V1::OverviewVegetables
 
-	#before do
-	#	doorkeeper_authorize!
-	#end
-end 
+		#before do
+		#	doorkeeper_authorize!
+		#end
+	end
+end
