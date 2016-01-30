@@ -2,10 +2,8 @@
 lock '3.4.0'
 
 set :application, 'agriculture_webapp'
-set :repo_url, 'git@github.com:yhunglee/agriculture_webapp.git' #COMMENT for experience deployng without github
-#set :repository, 'file:///Users/Howard/Code/agriculture_webapp/.git'
-#set :repo_url, 'file:///Users/Howard/Code/agriculture_webapp/.git'
-#set :repo_url, 'file://.git'
+set :repo_url, 'git@github.com:yhunglee/agriculture_webapp.git'
+set :passenger_restart_with_touch, true
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
