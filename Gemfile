@@ -2,17 +2,28 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.1.1'
+gem 'rails', '~> 4.2.5.1'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.3'
+gem 'sass-rails'
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier'
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
+gem 'coffee-rails'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
+
+# Include web-console gem for Rails 4.2.5.1
+group :development do
+	gem 'web-console', '~> 2.0'
+end 
+
+# Include rails-html-sanitizer for Rails 4.2.5 and aboved version
+gem 'rails-html-sanitizer' 
+
+# Include responders for Rails 4.2.5.1 and aboved version
+gem 'responders', '~> 2.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -50,7 +61,7 @@ gem 'grape-rails-routes' # Load routes that grape provides
 
 gem 'pg' # For activerecord using postgres
 gem 'pg_search' # For search
-gem 'rspec-rails', '~> 3.0' # Testing rails
+gem 'rspec-rails' # Testing rails
 gem 'doorkeeper' # OAuth provider
 gem 'devise' # User management
 gem 'kaminari' # for web pages pagination

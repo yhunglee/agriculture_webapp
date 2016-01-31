@@ -21,5 +21,12 @@ module AgricultureWebapp
     # config.i18n.default_locale = :de
     config.paths.add File.join('app', 'controllers', 'api'), glob: File.join('**', '*.rb')
     config.autoload_paths += Dir[Rails.root.join('app','controllers','api', '*')]
+
+    # Error handling in transaction callbacks:
+    # When you define a after_rollback or after_commit callback, you will receive a 
+    # deprecation warning about this upcoming change. When you are ready, you can 
+    # opt into the new behavior and remove the deprecation warning by adding following
+    # configuration to your config/application.rb:
+    config.active_record.raise_in_transactional_callbacks = true
   end
 end
