@@ -15,6 +15,8 @@
 
   ga('create', 'UA-73888730-3', 'auto');
 
+  ga('require', 'linkid');
+
   ga('send', 'pageview');
 
 }).call(this);
