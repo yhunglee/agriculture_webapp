@@ -19,6 +19,8 @@ Doorkeeper.configure do
   #   # Example implementation:
   #   Admin.find_by_id(session[:admin_id]) || redirect_to(new_admin_session_url)
   # end
+  #
+  # 20160219: Need to configure.
 
   # Authorization Code expiration time (default 10 minutes).
   # authorization_code_expires_in 10.minutes
@@ -26,6 +28,7 @@ Doorkeeper.configure do
   # Access token expiration time (default 2 hours).
   # If you want to disable expiration, set this to nil.
   # access_token_expires_in 2.hours
+  access_token_expires_in 1.month
 
   # Assign a custom TTL for implicit grants.
   # custom_access_token_expires_in do |oauth_client|
@@ -54,6 +57,9 @@ Doorkeeper.configure do
   # https://github.com/doorkeeper-gem/doorkeeper/wiki/Using-Scopes
   # default_scopes  :public
   # optional_scopes :write, :update
+  default_scopes :public, :description => "Access public data."
+  optional_scopes :write, :description => "Update your data."
+  optional_scopes :admin, :description => "Do admin things." 
 
   # Change the way client credentials are retrieved from the request object.
   # By default it retrieves first from the `HTTP_AUTHORIZATION` header, then
@@ -97,6 +103,7 @@ Doorkeeper.configure do
   #   http://tools.ietf.org/html/rfc6819#section-4.4.3
   #
   # grant_flows %w(authorization_code client_credentials)
+  grant_flows %w(authorization_code client_credentials implicit)
 
   # Under some circumstances you might want to have applications auto-approved,
   # so that the user skips the authorization step.
@@ -107,7 +114,9 @@ Doorkeeper.configure do
   #skip_authorization do |resource_owner, client|
 #	  false
   #end  #ref. page: http://codetunes.com/2014/oauth-implicit-grant-with-grape-doorkeeper-and-angularjs/
-
+  skip_authorization do
+	  true
+  end
 
   # WWW-Authenticate Realm (default "Doorkeeper").
   # realm "Doorkeeper"
