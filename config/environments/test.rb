@@ -41,4 +41,10 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+ 
+  # Care if the mailer can't send.
+  config.action_mailer.raised_delivery_errors = true 
+  
+  # Setup for devise gem at test environment
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 end

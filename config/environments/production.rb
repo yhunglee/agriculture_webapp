@@ -51,6 +51,13 @@ Rails.application.configure do
   # Use a different logger for distributed setups.
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
 
+  # Don't care if the mailer can't send.
+  # config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
+
+  # Setup for devise gem at production environment 
+  config.action_mailer.default_url_options = { host: 'agriculture.csie.io', port: 80}
+
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
 
