@@ -29,7 +29,5 @@ module AgricultureWebapp
     # configuration to your config/application.rb:
     config.active_record.raise_in_transactional_callbacks = true
 
-    # Config default_url_options for url_for 
-    config.action_mailer.default_url_options = { host: 'agriculture.csie.io' }
   end
 end
