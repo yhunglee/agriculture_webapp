@@ -7,9 +7,9 @@ class SpecifiedVegetables < Grape::API
 
 	include Grape::Kaminari
 
-	#before do 
-	#	doorkeeper_authorize!
-	#end 
+	before do 
+		doorkeeper_authorize!
+	end 
 
 	resource :specified_vegetables do 
 		desc "Get all transaction prices of all items today."

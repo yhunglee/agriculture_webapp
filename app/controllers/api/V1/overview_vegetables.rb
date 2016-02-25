@@ -13,7 +13,9 @@ class OverviewVegetables < Grape::API
 	end 
 
 	resource :overview_vegetables do 
-		desc "Get all transaction prices of all items today.",
+		desc "Get all transaction prices of all items today."#,
+=begin
+
 			success: Api::Entities::Response,
 			failure: [
 				[401, 'Unauthorized', Api::Entities::Error],
@@ -22,6 +24,7 @@ class OverviewVegetables < Grape::API
 			notes: <<-NOTE
 			get api :today testing!
 			NOTE
+=end
 		paginate per_page: 50, max_per_page: 100, offset: 0
 		oauth2 'public'
 		get :today do
@@ -30,7 +33,8 @@ class OverviewVegetables < Grape::API
 			end 
 		end
 
-		desc "Get transaction prices of delegated item in a delegated day.", 
+		desc "Get transaction prices of delegated item in a delegated day."#,
+=begin	 
 			success: Api::Entities::Response,
 			failure: [
 				[401, 'Unauthorized', Api::Entities::Error],
@@ -39,6 +43,7 @@ class OverviewVegetables < Grape::API
 			notes: <<-NOTE
 			transaction_date api in Testing overview!
 			NOTE
+=end 
 		params do
 			requires :transaction_date, type: Date, desc: 'code'
 			optional :name, type: String, allow_blank: false
