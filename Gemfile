@@ -58,6 +58,8 @@ end
 gem 'grape', '~> 0.10'
 # Print routes of grape apis via command: rake routes 
 gem 'grape-rails-routes' # Load routes that grape provides
+gem 'grape-kaminari' # for api inqueries pagination
+gem 'grape-swagger' # for api documents generation
 
 gem 'pg' # For activerecord using postgres
 gem 'pg_search' # For search
@@ -65,7 +67,8 @@ gem 'rspec-rails' # Testing rails
 gem 'doorkeeper' # OAuth provider
 gem 'devise' # User management
 gem 'kaminari' # for web pages pagination
-gem 'grape-kaminari' # for api inqueries pagination
+gem 'wine_bouncer', '~> 0.5.1' # A Ruby gem that allows Oauth2 protection with Doorkeeper for Grape Api's
+
 
 #gem 'd3js-rails' # For present data-visualization
 gem 'd3-rails' # For present data-visualization

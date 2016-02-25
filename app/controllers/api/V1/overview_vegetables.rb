@@ -13,20 +13,38 @@ class OverviewVegetables < Grape::API
 	end 
 
 	resource :overview_vegetables do 
-		desc "Get all transaction prices of all items today."
+		desc "Get all transaction prices of all items today.",
+			success: Api::Entities::Response,
+			failure: [
+				[401, 'Unauthorized', Api::Entities::Error],
+				[403, 'Forbidden', Api::Entities::Error]
+			  	],
+			notes: <<-NOTE
+			get api :today testing!
+			NOTE
 		paginate per_page: 50, max_per_page: 100, offset: 0
+		oauth2 'public'
 		get :today do
 			OverviewVegetable.where(transaction_date: Date.today).find_in_batches.order(:name) do |vegetables|
 				paginate(vegetables)
 			end 
 		end
 
-		desc "Get transaction prices of delegated item in a delegated day."
+		desc "Get transaction prices of delegated item in a delegated day.", 
+			success: Api::Entities::Response,
+			failure: [
+				[401, 'Unauthorized', Api::Entities::Error],
+				[403, 'Forbidden', Api::Entities::Error]
+			],
+			notes: <<-NOTE
+			transaction_date api in Testing overview!
+			NOTE
 		params do
 			requires :transaction_date, type: Date, desc: 'code'
 			optional :name, type: String, allow_blank: false
 			optional :item_code, type: String, allow_blank: false 
 		end 
+		oauth2 'public'
 		get '/' do
 			conditions = Hash[{date: params[:transaction_date], name: params[:name], code: params[:item_code]}.select{|k,v| v.present?}]
 			OverviewVegetable.where(conditions) do |vegetables|

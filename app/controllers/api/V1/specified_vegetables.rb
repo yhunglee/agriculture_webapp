@@ -7,13 +7,14 @@ class SpecifiedVegetables < Grape::API
 
 	include Grape::Kaminari
 
-	before do 
-		doorkeeper_authorize!
-	end 
+	#before do 
+	#	doorkeeper_authorize!
+	#end 
 
 	resource :specified_vegetables do 
 		desc "Get all transaction prices of all items today."
 		paginate per_page: 50, max_per_page: 100, offset: 0 
+		oauth2 'public'
 		get :today do
 			SpecifiedVegetable.where(transaction_date: Date.today).find_in_batches do |vegetables|
 				paginate(vegetables) 
@@ -26,6 +27,7 @@ class SpecifiedVegetables < Grape::API
 			optional :name, type: String, allow_blank: false
 			optional :trade_location, type: String, allow_blank: false
 		end 
+		oauth2 'public'
 		get "/" do
 			conditions = Hash[{transaction_date: params[:transaction_date], name: params[:name], trade_location: params[:trade_location]}.select{|k,v| v.present?}]
 			vegetables = SpecifiedVegetable.where(conditions) 
