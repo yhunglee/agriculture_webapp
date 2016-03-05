@@ -57,9 +57,10 @@ end
 # gem 'debugger', group: [:development, :test]
 gem 'grape', '~> 0.10'
 # Print routes of grape apis via command: rake routes 
-gem 'grape-rails-routes' # Load routes that grape provides
+gem 'grape-rails-routes' # Load routes that grape provides.
 gem 'grape-kaminari' # for api inqueries pagination
 gem 'grape-swagger' # for api documents generation
+gem 'hashie-forbidden_attributes' # Use with grape gem because it will let grape use its checking parameters procedure instead of rails.
 
 gem 'pg' # For activerecord using postgres
 gem 'pg_search' # For search

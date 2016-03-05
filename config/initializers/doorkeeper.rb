@@ -24,11 +24,12 @@ Doorkeeper.configure do
 
   # Authorization Code expiration time (default 10 minutes).
   # authorization_code_expires_in 10.minutes
+  authorization_code_expires_in 20.minutes
 
   # Access token expiration time (default 2 hours).
   # If you want to disable expiration, set this to nil.
   # access_token_expires_in 2.hours
-  access_token_expires_in 1.month
+  access_token_expires_in 30.days
 
   # Assign a custom TTL for implicit grants.
   # custom_access_token_expires_in do |oauth_client|
@@ -51,6 +52,7 @@ Doorkeeper.configure do
   # a registered application
   # Note: you must also run the rails g doorkeeper:application_owner generator to provide the necessary support
   # enable_application_owner :confirmation => false
+  enable_application_owner :confirmation => false
 
   # Define access token scopes for your provider
   # For more information go to
@@ -66,12 +68,14 @@ Doorkeeper.configure do
   # falls back to the `:client_id` and `:client_secret` params from the `params` object.
   # Check out the wiki for more information on customization
   # client_credentials :from_basic, :from_params
+  # client_credentials :from_basic, :from_params
 
   # Change the way access token is authenticated from the request object.
   # By default it retrieves first from the `HTTP_AUTHORIZATION` header, then
   # falls back to the `:access_token` or `:bearer_token` params from the `params` object.
   # Check out the wiki for more information on customization
   # access_token_methods :from_bearer_authorization, :from_access_token_param, :from_bearer_param
+  access_token_methods :from_bearer_authorization, :from_access_token_param, :from_bearer_param
 
   # Change the native redirect uri for client apps
   # When clients register with the following redirect uri, they won't be redirected to any server and the authorization code will be displayed within the provider
