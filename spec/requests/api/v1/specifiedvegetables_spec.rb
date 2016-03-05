@@ -30,7 +30,7 @@ describe SpecifiedVegetables do
 				query_url = "http://localhost:3000/oauth/authorize"
 				parameters = { "response_type" => "code", "client_id" => @app.owner.oauth_applications.last.uid, "redirect_uri" => "https://localhost:3000/api/v1/specified_vegetables/", "scope" => "public"}
 
-			        headers = {'Content-Type' => 'application/x-www-form-urlencoded;charset=utf-8'}
+			        headers = {'Content-Type' => 'application/x-www-form-urlencoded'}
 				get query_url, parameters, headers
 				expect(response.status).to eq(302) 
 				authorize_code_param = Rack::Utils.parse_query(URI.parse(response.location).query)
@@ -42,7 +42,7 @@ describe SpecifiedVegetables do
 				#expect(@authorize_code).to eq(123) #debug
 				query_url = "http://localhost:3000/oauth/token"
 				parameters = {"grant_type" => "authorization_code", "code" => authorize_code, "client_id" => @app.owner.oauth_applications.last.uid, "client_secret" => @app.owner.oauth_applications.last.secret, "redirect_uri" => "https://localhost:3000/api/v1/specified_vegetables/"}
-			        headers = {'Content-Type' => 'application/x-www-form-urlencoded;charset=utf-8', "Authorization" => "Basic " + Base64.encode64(@app.owner.oauth_applications.last.uid + ":" + @app.owner.oauth_applications.last.secret)}
+			        headers = {'Content-Type' => 'application/x-www-form-urlencoded', "Authorization" => "Basic " + Base64.encode64(@app.owner.oauth_applications.last.uid + ":" + @app.owner.oauth_applications.last.secret)}
 				post query_url, parameters, headers 
 				#expect(query_url).to eq(111)#debug
 				expect(response).to eq(200)
