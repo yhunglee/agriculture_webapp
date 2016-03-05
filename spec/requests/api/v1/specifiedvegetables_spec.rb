@@ -15,7 +15,6 @@ describe SpecifiedVegetables do
 	describe 'OAuth client requests the grant' do 
 		context 'When a REST client send a request for getting the grant' do
 
-			let(:authorize_code) {String.new}
 			before(:all) do
 				post "http://localhost:3000/users/sign_in?user[email]=test%40test123%2Ecom&user[password]=12345678" 
 				# expect(response.status).to eq(302) # means login successfully
@@ -23,6 +22,7 @@ describe SpecifiedVegetables do
 				@app.owner = User.last
 				@app.save!
 
+				@authorize_code = String.new
 			end
 
 			it 'should getting response code 302 for requesting authorization code.' do
@@ -35,13 +35,13 @@ describe SpecifiedVegetables do
 				expect(response.status).to eq(302) 
 				authorize_code_param = Rack::Utils.parse_query(URI.parse(response.location).query)
 				#expect(authorize_code_param).to eq( "code" => "123" ) #debug for query parameter of code
-				authorize_code << authorize_code_param['code']
+				@authorize_code << authorize_code_param['code']
 			end
 
 			it 'should get response code 302 for requesting access token.'	do
 				#expect(@authorize_code).to eq(123) #debug
 				query_url = "http://localhost:3000/oauth/token"
-				parameters = {"grant_type" => "authorization_code", "code" => authorize_code, "client_id" => @app.owner.oauth_applications.last.uid, "client_secret" => @app.owner.oauth_applications.last.secret, "redirect_uri" => "https://localhost:3000/api/v1/specified_vegetables/"}
+				parameters = {"grant_type" => "authorization_code", "code" => @authorize_code, "client_id" => @app.owner.oauth_applications.last.uid, "redirect_uri" => "https://localhost:3000/api/v1/specified_vegetables/"}
 			        headers = {'Content-Type' => 'application/x-www-form-urlencoded', "Authorization" => "Basic " + Base64.urlsafe_encode64(@app.owner.oauth_applications.last.uid + ":" + @app.owner.oauth_applications.last.secret, :padding => false)}
 				post query_url, parameters, headers 
 				#expect(query_url).to eq(111)#debug
