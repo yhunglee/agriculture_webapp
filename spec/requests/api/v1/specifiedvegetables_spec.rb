@@ -42,7 +42,7 @@ describe SpecifiedVegetables do
 				#expect(@authorize_code).to eq(123) #debug
 				query_url = "http://localhost:3000/oauth/token"
 				parameters = {"grant_type" => "authorization_code", "code" => @authorize_code, "client_id" => @app.owner.oauth_applications.last.uid, "redirect_uri" => "https://localhost:3000/api/v1/specified_vegetables/"}
-			        headers = {'Content-Type' => 'application/x-www-form-urlencoded', "Authorization" => "Basic " + Base64.urlsafe_encode64(@app.owner.oauth_applications.last.uid + ":" + @app.owner.oauth_applications.last.secret, :padding => false)}
+				headers = {'content-type' => 'application/x-www-form-urlencoded', "authorization" => "Basic" + Base64.strict_encode64( @app.owner.oauth_applications.last.uid + ":" + @app.owner.oauth_applications.last.secret ), "cache-control" => "no-cache"}
 				post query_url, parameters, headers 
 				#expect(query_url).to eq(111)#debug
 				expect(response).to eq(200)
@@ -53,6 +53,7 @@ describe SpecifiedVegetables do
 			end 
 		end
 	end
+
 
 	context 'When send a request for three parameters about date, name and/or trade location for specified vegetabls using path: GET /specified_vegetables/query' do
 		it 'should return a JSON-format response of transaction prices of vegetables if we use a delegated item name:金針筍 and a delegated day:20131031 in one request.' do
