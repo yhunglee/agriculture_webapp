@@ -1,5 +1,6 @@
 require 'rails_helper'
 require 'pp'
+require 'json'
 
 describe SpecifiedVegetables do
 
@@ -17,37 +18,35 @@ describe SpecifiedVegetables do
 		context 'When a REST client send a request for getting the grant' do
 			before(:all) do
 				post "http://localhost:3000/users/sign_in?user[email]=test%40test123%2Ecom&user[password]=12345678" 
-				#post query_url, parameters#, headers 
 				expect(response.status).to eq(302) # means login successfully
 				@app = Doorkeeper::Application.new :name => 'rspectest-107', :redirect_uri => 'https://localhost:3000/api/v1/specified_vegetables/', :scopes => 'public' # it's better to assign one value for :scopes at least.
 				@app.owner = User.last
 				@app.save!
 
 				@authorize_code = String.new
+				@access_token = String.new
 			end
 
-			it 'should getting response code 302 for requesting authorization code.' do
+			it 'should getting response code 302 for requesting authorization code and access token.' do
 
 				query_url = "http://localhost:3000/oauth/authorize"
 				parameters = { "response_type" => "code", "client_id" => @app.owner.oauth_applications.last.uid, "redirect_uri" => 'https://localhost:3000/api/v1/specified_vegetables/', "scope" => "public"}
 
-			        headers = {'content-type' => 'application/x-www-form-urlencoded'}
+				headers = {'content-type' => 'application/x-www-form-urlencoded'}
 				get query_url, parameters, headers
 				expect(response.status).to eq(302) 
 				authorize_code_param = Rack::Utils.parse_query(URI.parse(response.location).query)
-				#expect(authorize_code_param).to eq( "code" => "123" ) #debug for query parameter of code
 				@authorize_code << authorize_code_param['code']
-			end
+				# Above are about acquiring authorization code
 
-			it 'should get response code 302 for requesting access token.'	do
-				#expect(@authorize_code).to eq(123) #debug
+				# Following are about acquire access token
 				query_url = "http://localhost:3000/oauth/token"
 				parameters = {"grant_type" => "authorization_code", "code" => @authorize_code, "client_id" => @app.owner.oauth_applications.last.uid, "redirect_uri" => "https://localhost:3000/api/v1/specified_vegetables/"}
 				headers = {'content-type' => 'application/x-www-form-urlencoded', "authorization" => 'Basic ' + Base64.strict_encode64( @app.owner.oauth_applications.last.uid + ':' + @app.owner.oauth_applications.last.secret ), "cache-control" => 'no-cache'}
-				post query_url, parameters, headers
 
-				#expect(query_url).to eq(111)#debug
-				expect(response).to eq(200)
+				post query_url, parameters, headers
+				@access_token << JSON.parse(response.body)['access_token']
+				expect(@access_token).to eq("access_token") # Only for trial
 			end 
 
 			after(:all) do
