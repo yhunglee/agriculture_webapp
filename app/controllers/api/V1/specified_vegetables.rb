@@ -16,8 +16,14 @@ class SpecifiedVegetables < Grape::API
 		paginate per_page: 50, max_per_page: 100, offset: 0 
 		oauth2 'public'
 		get :today do
-			SpecifiedVegetable.where(transaction_date: Date.today).find_in_batches do |vegetables|
+			veggies  = SpecifiedVegetable.where(transaction_date: Date.today).find_in_batches do |vegetables|
 				paginate(vegetables) 
+			end 
+
+			if veggies.empty?
+				raise RecordNotFoundForToday
+			else
+				veggies
 			end 
 		end
 
@@ -30,8 +36,12 @@ class SpecifiedVegetables < Grape::API
 		oauth2 'public'
 		get "/" do
 			conditions = Hash[{transaction_date: params[:transaction_date], name: params[:name], trade_location: params[:trade_location]}.select{|k,v| v.present?}]
-			vegetables = SpecifiedVegetable.where(conditions) 
-			paginate(vegetables)
+			veggies = SpecifiedVegetable.where(conditions) 
+			if veggies.empty?
+				raise RecordNotFoundForConditions
+			else 
+				paginate(veggies)
+			end 
 
 		end
 

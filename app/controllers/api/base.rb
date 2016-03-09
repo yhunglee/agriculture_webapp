@@ -1,45 +1,44 @@
 require 'doorkeeper/grape/helpers'
 module API
+	class RecordNotFoundForToday < StandardError ; end 
+	class RecordNotFoundForConditions < StandardError ; end
+
 	class Base < Grape::API
 		helpers Doorkeeper::Grape::Helpers
 
 		format :json
 		version 'v1', using: :path
+		#before do
+		#	doorkeeper_authorize!
+		#end
 
-		use ::WineBouncer::OAuth2 # WineBouncer gem
+		rescue_from RecordNotFoundForToday do |e|
+			error!({"error" => "Found no records. Has not updated for today, please wait.", "error_code" => 404}, 404 )
+	        end
+	        
+		rescue_from RecordNotFoundForConditions do |e|
+			error!({"error" => "Found no records through query values. Please recheck your parameters.", "error_code" => 404}, 404 )
+		end
 
-		mount SpecifiedVegetables
-		mount OverviewVegetables
-
-		rescue_from :all do | e |
-			eclass = e.class.to_s 
-			message = "OAuth error: #{e.to_s}" if eclass.match('WineBouncer::Errors')
-			status = case
-				 when eclass.match('OAuthUnauthorizedError')
-					 401
-				 when eclass.match('OAuthForbiddenError')
-					 403
-				 when eclass.match('RecordNotFound'), e.message.match(/unable to find/i).present?
-					 404
-				 else
-					 (e.respond_to? :status) && e.status || 500
-				 end
-			opts = { error: "#{message || e.message}" }
-			opts[:trace] = e.backtrace[0,10] unless Rails.env.production?
-			Rack::Response.new(opts.to_json, status, {
-				'Content-Type' => "application/json",
-				'Access-Control-Allow-Origin' => '*',
-				'Access-Control-Request-Method' => '*',
-			}).finish
+		rescue_from WineBouncer::Errors::OAuthUnauthorizedError do |e|
+			error!({"error" => "OAuth unauthorized error because invalid access token.", "error_code" => 401}, 401 )
 		end 
 
+		rescue_from WineBouncer::Errors::OAuthForbiddenError do |e|
+			error!({"error" => "OAuth forbidden error because insufficient scopes.", "error_code" => 403}, 403 )
+		end 
+
+		use ::WineBouncer::OAuth2 # WineBouncer gem
 		add_swagger_documentation # Swagger: for generating api documents
 		before do
 			header['Access-Control-Allow-Origin'] = '*'
 			header['Access-Control-Request-Method'] = '*'
 		end
-		#before do
-		#	doorkeeper_authorize!
-		#end
+
+		mount SpecifiedVegetables
+		mount OverviewVegetables
+
+
+
 	end
 end
