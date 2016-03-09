@@ -53,14 +53,14 @@ namespace :deploy do
     end
   end
  
-  desc 'Loading API routes of grape built.' 
-  after :finished do
-    on roles(:all) do
+  #desc 'Loading API routes of grape built.' 
+  #after :finished do
+  #  on roles(:all) do
 	    # Execuate loading APIs' routes
-	    within release_path do
-		    execuate :rake, 'routes_with_grape'
-	    end
-    end
-  end 
+#	    within release_path do
+#		    execuate :rake, 'routes_with_grape'
+#	    end
+ #   end
+ # end 
 
 end
