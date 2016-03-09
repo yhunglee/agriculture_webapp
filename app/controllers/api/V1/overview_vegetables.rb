@@ -30,17 +30,7 @@ class OverviewVegetables < Grape::API
 			 	
 		end
 
-		desc "Get transaction prices of delegated item in a delegated day."#,
-=begin	 
-			success: Api::Entities::Response,
-			failure: [
-				[401, 'Unauthorized', Api::Entities::Error],
-				[403, 'Forbidden', Api::Entities::Error]
-			],
-			notes: <<-NOTE
-			transaction_date api in Testing overview!
-			NOTE
-=end 
+		desc "Get transaction prices of delegated item in a delegated day."
 		params do
 			requires :transaction_date, type: Date, desc: 'code'
 			optional :name, type: String, allow_blank: false

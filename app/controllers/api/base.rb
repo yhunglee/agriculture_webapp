@@ -1,4 +1,6 @@
 require 'doorkeeper/grape/helpers'
+require 'grape-swagger'
+
 module API
 	class RecordNotFoundForToday < StandardError ; end 
 	class RecordNotFoundForConditions < StandardError ; end
@@ -29,7 +31,6 @@ module API
 		end 
 
 		use ::WineBouncer::OAuth2 # WineBouncer gem
-		add_swagger_documentation # Swagger: for generating api documents
 		before do
 			header['Access-Control-Allow-Origin'] = '*'
 			header['Access-Control-Request-Method'] = '*'
@@ -40,5 +41,6 @@ module API
 
 
 
+		add_swagger_documentation({ :mount_path => "/apidoc", :api_version => "v1", :hide_format => true, :hide_documentation_path => true, :info => { :title => "Agriculture price API document", :description => "Documents for agriculture transaction price API in Taiwan", :contact => "howard@csie.io", :license => "", :license_url => "", :term_of_service_url => "" } }) # Swagger: for generating api documents
 	end
 end
