@@ -104,5 +104,9 @@ describe SpecifiedVegetables do
 			get "http://localhost:3000/api/v1/specified_vegetables?transaction_date=20131031&name=%E9%87%91%E9%87%9D%E7%AD%8D"
 			expect(response.status).to eq(401)
 		end 
+
+		after(:all) do 
+			@app.destroy
+		end 
 	end
 end
