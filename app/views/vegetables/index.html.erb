@@ -1,4 +1,25 @@
-<h1> This page is overview for vegetables. </h1>
+<h1> This trending page is overview for vegetables. </h1>
+
+<div id="banner">
+	<div id="logo">
+	</div>
+	<div id="title">
+	</div>
+</div>
+
+<ul class="navi-bar">
+	<li class="about-us">
+		<%= link_to 'About us', {controller: "vegetables", action: "about_us"}, id: "about-us", class: "about-us" %>
+	</li>
+
+	<li class="bulletin-board">
+		<%= link_to "Bulletin Board", {controller: "vegetables", action: "bulletin_board"}, id: "bulletin-board", class: "bulletin-board" %>
+	</li>
+
+	<li class="trending">
+		<%= link_to "Trending", {controller: "vegetables", action: "trending"}, id: "trending", class: "trending" %>
+	</li>
+</ul>
 
 <%= include_gon(:init => true) %>
 <%= form_tag root_url, :method => 'get' do %>

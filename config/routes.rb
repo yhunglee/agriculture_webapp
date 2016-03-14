@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   # root 'welcome#index'
   root 'vegetables#index'
 
+  get 'aboutus', to: 'vegetables#about_us', as: "aboutus"
+  get 'bulletinboard', to: 'vegetables#bulletin_board', as: "bulletinboard"
+  get 'trending', to: 'vegetables#trending', as: "trending"
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

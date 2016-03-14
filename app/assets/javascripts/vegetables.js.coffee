@@ -32,7 +32,7 @@ chart = c3.generate({
       x: 'date'
       value: ['total_average_price','total_transaction_quantity']
     }
-    labels: true
+    labels: false
     axes: {
       total_transaction_quantity: 'y2'
     }
