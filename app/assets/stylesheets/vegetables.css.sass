@@ -5,6 +5,43 @@ body
   margin: 0
   padding: 0
 
+*  
+  box-sizing: border-box
+
+.col-1
+  width: 8.33%
+.col-2
+  width: 16.66%
+.col-3
+  width: 25%
+.col-4
+  width: 33.33%
+.col-5
+  width: 41.66%
+.col-6
+  width: 50%
+.col-7
+  width: 58.33%
+.col-8
+  width: 66.66%
+.col-9
+  width: 75%
+.col-10
+  width: 83.33%
+.col-11
+  width: 91.66%
+.col-12
+  width: 100%
+
+.row:after
+  content: ""
+  clear: both
+  display: block
+
+[class*=col-]
+  float: left
+  padding: 15px
+
 ul.navi-bar
   position: fixed
   float: right
@@ -12,39 +49,125 @@ ul.navi-bar
   margin: 0px
   padding: 0px
   overflow: hidden
-  width: auto
-  height: 20px
-  top: 10px 
-  right: 1px
-  border: 10px solid #e7e7e7
+  width: 100%
+  height: auto
+  top: 0 
+  right: 0
+  border: 1px solid #e7e7e7
   background-color: #f3f3f3
   li
+    position: relative
     display: inline
-    width: auto
-    max-width: 300px
-    border: 1px solid #f2f2f2
-    color: black
+    float: left
+    width: 33%
+    border-left: 1px solid black
+    border-top: 1px solid black
+    border-bottom: 1px solid black
     margin: 0px
     padding: 1px
+    .trending
+      border-right: 1px solid black
     a
-      display: inline
+      display: inline-block
       color: black
       text-align: center
-      padding: 10px 5px
+      padding: 0px
+      width: 100%
       &:hover
-        text-decoration: none
+        color: while
+        background-color: lime
+
+ul.veggie-list
+  display: none 
+  position: fixed
+  overflow: auto
+  background-color: white
+  top: 10%
+  left: 0%
+  width: 70%
+  height: 80%
+  border: 2px solid grey
+
+.btn-submit-veggie-query
+  display: none
+  button[type*=submit]
+    position: fixed
+    width: 10%
+    height: 10%
+    top: 20%
+    left: 70%
+    background-color: red
+    font-size: 12px
+
+
+label
+  display: inline-block
+  float: left
+  overflow: auto
+
+
+#btn-veggie-list
+  position: fixed
+  bottom: 10%
+  left: 0%
+  font-size: 14px
+  display: block
+  width: 30%
+  height: 10%
+  opacity: 0.5
+  &:hover
+    opacity: 1
+
+select.query-time
+  position: static
+  display: block
+  float: right
+  right: 5%
 
 #css_table
-  display: table
-  margin: 50px 50px 50px 10px
-  width: 100%
-  height: 100%
-.css_td
-  text-align: center 
-  display: table-cell
-  &:hover
-    color: Red
-.css_tr
-  display: table-row
-  &:hover
-    background-color: LightGreen
+  display: none
+
+@media only screen and (min-width:  400px )
+  #css_table
+    display: table
+    margin: 50px 50px 50px 10px
+    width: 100%
+    height: 100%
+  .css_td
+    text-align: center 
+    display: table-cell
+    &:hover
+      color: Red
+  .css_tr
+    display: table-row
+    &:hover
+      background-color: LightGreen
+
+  ul
+    #btn-veggie-list
+      position: fixed
+      bottom: 10%
+      left: 0%
+      font-size: 14px
+      width: 10%
+      height: auto
+      opacity: 0.5
+      &:hover
+        opacity: 1
+
+@media only screen and (min-width:  767px)
+  #css_table
+    display: table
+    margin: 50px 50px 50px 10px
+    width: 100%
+    height: 100%
+  .css_td
+    text-align: center 
+    display: table-cell
+    &:hover
+      color: Red
+  .css_tr
+    display: table-row
+    &:hover
+      background-color: LightGreen
+

@@ -1,8 +1,9 @@
 class VegetablesController < ApplicationController
 	
 	def index
-		@vegetables = search(params[:query])
-		gon.myDataV_json = @vegetables.to_json(:except => :id)
+		@overviewVegetables = search(params[:query])
+		gon.myDataV_json = @overviewVegetables.to_json(:except => :id)
+		@vegetables = Vegetable.all
 	end
 
 	def about_us
@@ -13,6 +14,8 @@ class VegetablesController < ApplicationController
 	
 	def trending
 	end 
+
+
 	private
 	def search(query)
 		if query && !(query.empty?)

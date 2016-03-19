@@ -23,6 +23,7 @@
 #    svg_height - (d.total_average_price * 20) + 20
 #  ).attr("font-family", "sans-serif").attr("font-size", "20px").attr "fill", "white"
 #
+
 myJSONObj = JSON.parse(gon.myDataV_json)
 chart = c3.generate({
   bindto: '#chart'
@@ -59,4 +60,25 @@ chart = c3.generate({
     }
   }
 })
+
+display_or_not_veggie_list = ->
+  #current_value = document.getElementsByClassName('veggie-list').style.display
+  #current_value = $(document).getElementsByClassName('veggie-list').style.display
+  currentDisplayConfig = $('.veggie-list').css('display')
+  if currentDisplayConfig == "none"
+     #document.getElementsByClassName('veggie-list').style.display = "block"
+     #$(document).getElementsByClassName('veggie-list').style.display = "block"
+     $('.veggie-list').css('display', 'block')
+     $('.btn-submit-veggie-query').css('display', 'block')
+     $('.btn-veggie-list').css('left', '70%')
+  else 
+     #document.getElementsByClassName('veggie-list').style.display = "block"
+     #$(document).getElementsByClassName('veggie-list').style.display = "block"
+     $('.veggie-list').css('display', 'none')
+     $('.btn-submit-veggie-query').css('display', 'none')
+     $('.btn-veggie-list').css('left', '0%')
+
+#$('.btn-veggie-list').on 'click', display_or_not_veggie_list
+#$(document).on 'click','.btn-veggie-list' , display_or_not_veggie_list
+$(document).off('click', '.btn-veggie-list').on 'click', '.btn-veggie-list', display_or_not_veggie_list
 

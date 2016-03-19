@@ -32,8 +32,37 @@
 </div>
 <%= javascript_include_tag "vegetables" %>
 
-<%= paginate @vegetables %>
-<%= page_entries_info @vegetables %>
+<%= paginate @overviewVegetables %>
+
+<div class="paginate-info">
+	<%= page_entries_info @overviewVegetables %>
+</div>
+
+<ul class="show-or-hide-veggie-list">
+	 <button type="button" name="btn-veggie-list" id="btn-veggie-list" class="btn-veggie-list">Veggie list
+	</button>
+</ul>
+<ul class="veggie-list">
+	<% counter = 1 %>
+	<%= form_tag root_url, {:method => 'get', id: "veggie-query"} do %>
+	<% @vegetables.each { |element| %>
+		<label><%= check_box_tag 'query[]', element.name, false, { class: 'veggie-'+ counter.to_s, id: 'veggie-' + counter.to_s }%> <%= element.name %></label>
+		<% counter += 1 %>
+	<% } %>
+        <% end %>
+</ul>
+	<div class="btn-submit-veggie-query">
+		<button type="submit" name="btn-submit-veggie-query" form="veggie-query">送出查詢</button>
+	</div>
+<select name="query-time" class="query-time">
+	<option value="10">10 Days</option>
+	<option value="30">30 Days</option>
+	<option value="90">3 months</option>
+	<option value="180">6 months</option>
+	<option value="365">1 year</option>
+	<option value="sametimeperiodatlastyear">去年同期</option>
+</select>
+
 <div id="css_table">
 	<div class="css_tr"> 
 		<div class="css_td">Name</div> 
@@ -43,7 +72,7 @@
 		<div class="css_td">Total transaction quantity</div>
 	</div>
 	<% i = 1 %>
-	<% @vegetables.each{ |item| %>
+	<% @overviewVegetables.each{ |item| %>
 		<div class="css_tr">
 			<div class="css_td"><div id="itemname-<%= i %>"><%= item.name %></div></div>
 			<div class="css_td"><div id="itemcode-<%= i %>"><%= item.code %></div></div>
@@ -54,5 +83,7 @@
 		<% i += 1 %>
 	<% } %>
 </div>
-<%= page_entries_info @vegetables %>
-<%= paginate @vegetables %>
+<div class="paginate-info">
+	<%= page_entries_info @overviewVegetables %>
+</div>
+<%= paginate @overviewVegetables %>

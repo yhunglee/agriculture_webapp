@@ -11,11 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160226080310) do
+ActiveRecord::Schema.define(version: 20160318034202) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "zhparser"
+
+  create_table "flowers", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.string   "code",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "flowers", ["code"], name: "index_flowers_on_code", unique: true, using: :btree
+
+  create_table "fruits", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.string   "type"
+    t.string   "code",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "fruits", ["code"], name: "index_fruits_on_code", unique: true, using: :btree
 
   create_table "oauth_access_grants", force: :cascade do |t|
     t.integer  "resource_owner_id",             null: false
@@ -104,5 +123,14 @@ ActiveRecord::Schema.define(version: 20160226080310) do
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "vegetables", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.string   "code",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "vegetables", ["name", "code"], name: "index_vegetables_on_name_and_code", unique: true, using: :btree
 
 end
