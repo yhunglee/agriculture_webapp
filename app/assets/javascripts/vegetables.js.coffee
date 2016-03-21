@@ -82,3 +82,53 @@ display_or_not_veggie_list = ->
 #$(document).on 'click','.btn-veggie-list' , display_or_not_veggie_list
 $(document).off('click', '.btn-veggie-list').on 'click', '.btn-veggie-list', display_or_not_veggie_list
 
+get_parameters_from_url = ->
+  #https://stelfox.net/blog/2013/12/access-get-parameters-with-coffeescript/
+  aryParams = {}
+  rawVars = window.location.search.substring(1).split("&")
+
+  queryMultipleValuePattern = /query\[\]/
+  if rawVars?.length
+    i = 1
+    for element in rawVars
+      [key, val] = element.split("=")
+      if (decodeURIComponent(key)).match(queryMultipleValuePattern)
+        aryParams[(decodeURIComponent(key) + "_#{i}")] = decodeURIComponent(val)
+        i += 1
+      else
+        aryParams[decodeURIComponent(key)] = decodeURIComponent(val)
+      # Fixed: have problems if there are many "query[]" item in key. 
+ 
+  #if !(aryParams?.length) # http://stackoverflow.com/questions/8127883/easiest-way-to-check-if-string-is-null-or-empty/8127920#8127920
+    #alert "response at get parameters from url function: " + JSON.stringify(aryParams,null, 4) #debug
+  #else #debug
+    #alert "empty"
+  aryParams
+
+append_previous_params_of_form_to_lastest_request = (previousParams) ->
+  if previousParams?
+    delete previousParams['query-time'] if previousParams['query-time']? # fix duplicate parameters of query-time
+    delete previousParams['page'] if previousParams['page']? # fix duplicate parameters of page
+    $('#filter-veggie-query input[type=hidden]').remove()
+
+    queryMultipleValuePattern = /query\[\]_[\d]+/
+    for property in Object.keys(previousParams)
+      #result = property.match(queryMultipleValuePattern) #debug
+      if property.match(queryMultipleValuePattern)?
+      #if result? #debug
+        $('#filter-veggie-query').append('<input type="hidden" name="query[]" value="' + previousParams[property] + '">')
+      else
+        $('#filter-veggie-query').append('<input type="hidden" name="' + property + '" value="' + previousParams[property] + '">')
+
+submit_query_time_form_of_select_option = ->
+  response = get_parameters_from_url()
+  #alert "response: " + JSON.stringify(response,null,4) #debug
+  #alert "response[utf8]=" + response['utf8'] + ", response[query[]]=" + response['query[]_1'] #debug
+  if response?
+    #alert "response at before run append_previous_params_of_form_to_lastest_request function: " + JSON.stringify(response,null,4) #debug
+    append_previous_params_of_form_to_lastest_request(response)
+    #alert "after run append_previous_params_of_form_to_lastest_request. " #debug
+    $("#filter-veggie-query").submit() #submit the filter-veggie-query form 
+
+$(document).off('change', '.query-time').on 'change', '.query-time', submit_query_time_form_of_select_option
+

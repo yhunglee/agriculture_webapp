@@ -51,17 +51,24 @@
 	<% } %>
         <% end %>
 </ul>
-	<div class="btn-submit-veggie-query">
-		<button type="submit" name="btn-submit-veggie-query" form="veggie-query">送出查詢</button>
-	</div>
-<select name="query-time" class="query-time">
+
+<div class="btn-submit-veggie-query">
+	<button type="submit" name="btn-submit-veggie-query" form="veggie-query">送出查詢</button>
+</div>
+
+<%= form_tag root_url, {:method => 'get', id: 'filter-veggie-query'} do %>
+<select name="query-time" class="query-time" form="filter-veggie-query">
+        <option value=""> </option>
 	<option value="10">10 Days</option>
 	<option value="30">30 Days</option>
-	<option value="90">3 months</option>
-	<option value="180">6 months</option>
-	<option value="365">1 year</option>
-	<option value="sametimeperiodatlastyear">去年同期</option>
+	<option value="90">3 Months</option>
+	<option value="180">6 Months</option>
+	<option value="365">1 Year</option>
+	<option value="730">2 Years</option>
+	<option value="1825">5 Years (debug)</option>
+	<option value="354">去年農曆同期</option>
 </select>
+<% end %>
 
 <div id="css_table">
 	<div class="css_tr"> 
