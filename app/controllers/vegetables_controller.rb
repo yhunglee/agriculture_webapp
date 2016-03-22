@@ -29,7 +29,7 @@ class VegetablesController < ApplicationController
 					OverviewVegetable.search_by_all(query).order(:name, :date).page(params[:page])
 				else
 					# query with parameter[:query] and parameter[:query-time]
-					OverviewVegetable.search_by_all(query).where({date: queryPeriod.days.ago}).order(:name, :date).page(params[:page])
+					OverviewVegetable.search_by_all(query).where({:date => queryPeriod.days.ago..Date.today}).order(:name, :date).page(params[:page])
 				end 
 			else
 				OverviewVegetable.search_by_all(query).order(:name, :date).page(params[:page])
@@ -45,7 +45,7 @@ class VegetablesController < ApplicationController
 					logger.warn "Value of parameter[:query-time] is not in range when an user doesn't specify any query parameter."
 					OverviewVegetable.order(:name, :date).page(params[:page])
 				else
-					OverviewVegetable.where({date: queryPeriod.days.ago}).order(:name, :date).page(params[:page])
+					OverviewVegetable.where({:date => queryPeriod.days.ago..Date.today}).order(:name, :date).page(params[:page])
 				end
 			else 	
 				OverviewVegetable.order(:name, :date).page(params[:page])

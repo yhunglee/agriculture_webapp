@@ -3,7 +3,7 @@ class OverviewVegetable < ActiveRecord::Base
 	paginates_per 50
 
 	include PgSearch
-	pg_search_scope :search_by_all, :against => [:name, :code, :date], :using => { :tsearch => {:dictionary => "mandarin", :prefix => true, :negation => true } }
+	pg_search_scope :search_by_all, :against => [:name, :code, :date], :using => { :tsearch => {:dictionary => "mandarin", :prefix => true, :negation => true, :any_word => true } }
 =begin
 	def search(query)
 		if query
