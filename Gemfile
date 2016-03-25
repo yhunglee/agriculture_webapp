@@ -63,7 +63,7 @@ gem 'grape-swagger' # for api documents generation
 gem 'hashie-forbidden_attributes' # Use with grape gem because it will let grape use its checking parameters procedure instead of rails.
 
 gem 'pg' # For activerecord using postgres
-gem 'pg_search' # For search
+#gem 'pg_search' # For search. 20160325: I don't need it because I don't use full text search in postgres.
 gem 'rspec-rails' # Testing rails
 gem 'doorkeeper' # OAuth provider
 gem 'devise' # User management

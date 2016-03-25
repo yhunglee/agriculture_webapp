@@ -11,27 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160318034202) do
+ActiveRecord::Schema.define(version: 20160323090312) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "zhparser"
 
   create_table "flowers", force: :cascade do |t|
-    t.string   "name",       null: false
-    t.string   "code",       null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "name",                         null: false
+    t.string   "code",                         null: false
+    t.datetime "created_at", default: "now()", null: false
+    t.datetime "updated_at", default: "now()", null: false
   end
 
   add_index "flowers", ["code"], name: "index_flowers_on_code", unique: true, using: :btree
 
   create_table "fruits", force: :cascade do |t|
-    t.string   "name",       null: false
+    t.string   "name",                         null: false
     t.string   "type"
-    t.string   "code",       null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "code",                         null: false
+    t.datetime "created_at", default: "now()", null: false
+    t.datetime "updated_at", default: "now()", null: false
   end
 
   add_index "fruits", ["code"], name: "index_fruits_on_code", unique: true, using: :btree
@@ -87,6 +87,8 @@ ActiveRecord::Schema.define(version: 20160318034202) do
     t.float "total_transaction_quantity", null: false
   end
 
+  add_index "overview_vegetable", ["name", "code", "date"], name: "index_overview_vegetable_on_name_and_code_and_date", unique: true, using: :btree
+
   create_table "specified_vegetable", force: :cascade do |t|
     t.text  "name",                   null: false
     t.text  "code",                   null: false
@@ -100,6 +102,11 @@ ActiveRecord::Schema.define(version: 20160318034202) do
     t.float "average_price"
     t.float "trade_quantity"
   end
+
+  add_index "specified_vegetable", ["detail_processing_type"], name: "index_specified_vegetable_on_detail_processing_type", using: :btree
+  add_index "specified_vegetable", ["kind"], name: "index_specified_vegetable_on_kind", using: :btree
+  add_index "specified_vegetable", ["name", "code", "transaction_date"], name: "index_specified_vegetable_on_name_and_code_and_transaction_date", using: :btree
+  add_index "specified_vegetable", ["trade_location"], name: "index_specified_vegetable_on_trade_location", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -125,10 +132,10 @@ ActiveRecord::Schema.define(version: 20160318034202) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "vegetables", force: :cascade do |t|
-    t.string   "name",       null: false
-    t.string   "code",       null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "name",                         null: false
+    t.string   "code",                         null: false
+    t.datetime "created_at", default: "now()", null: false
+    t.datetime "updated_at", default: "now()", null: false
   end
 
   add_index "vegetables", ["name", "code"], name: "index_vegetables_on_name_and_code", unique: true, using: :btree
