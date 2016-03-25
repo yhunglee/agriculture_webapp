@@ -150,10 +150,6 @@ GEM
       mini_portile2 (~> 2.0.0.rc2)
     orm_adapter (0.5.0)
     pg (0.18.4)
-    pg_search (1.0.5)
-      activerecord (>= 3.1)
-      activesupport (>= 3.1)
-      arel
     rack (1.6.4)
     rack-accept (0.4.5)
       rack (>= 0.4)
@@ -280,7 +276,6 @@ DEPENDENCIES
   jquery-rails
   kaminari
   pg
-  pg_search
   rails (~> 4.2.5.1)
   rails-html-sanitizer
   responders (~> 2.0)
