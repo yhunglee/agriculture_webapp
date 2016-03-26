@@ -6,7 +6,12 @@
 	<div id="title">
 	</div>
 </div>
-
+<div id="warning">
+	<%= flash[:warning] %>
+</div>
+<div id="error">
+	<%= flash[:error] %>
+</div>
 <ul class="navi-bar">
 	<li class="about-us">
 		<%= link_to 'About us', {controller: "vegetables", action: "about_us"}, id: "about-us", class: "about-us" %>
@@ -32,10 +37,10 @@
 </div>
 <%= javascript_include_tag "vegetables" %>
 
-<%= paginate @overviewVegetables %>
+<%= if !(@overviewVegetables.nil?) then paginate @overviewVegetables end %>
 
 <div class="paginate-info">
-	<%= page_entries_info @overviewVegetables %>
+	<%= if !(@overviewVegetables.nil?) then page_entries_info @overviewVegetables end %>
 </div>
 
 <ul class="show-or-hide-veggie-list">
@@ -55,7 +60,8 @@
 <div class="btn-submit-veggie-query">
 	<button type="submit" name="btn-submit-veggie-query" form="veggie-query">送出查詢</button>
 </div>
-
+<div id="query-time">
+	In recent time: 	
 <%= form_tag root_url, {:method => 'get', id: 'filter-veggie-query'} do %>
 <select name="query-time" class="query-time" form="filter-veggie-query">
         <option value=""> </option>
@@ -69,11 +75,12 @@
 	<option value="354">去年農曆同期</option>
 </select>
 <% end %>
+</div>
 
+<% if !(@overviewVegetables.nil?) then %>
 <div id="css_table">
 	<div class="css_tr"> 
 		<div class="css_td">Name</div> 
-		<div class="css_td">Code</div> 
 		<div class="css_td">Date</div>
 		<div class="css_td">Total average price(NTD)</div>
 		<div class="css_td">Total transaction quantity</div>
@@ -82,7 +89,6 @@
 	<% @overviewVegetables.each{ |item| %>
 		<div class="css_tr">
 			<div class="css_td"><div id="itemname-<%= i %>"><%= item.name %></div></div>
-			<div class="css_td"><div id="itemcode-<%= i %>"><%= item.code %></div></div>
 			<div class="css_td"><div id="itemdate-<%= i %>"><%= item.date %></div></div>
 			<div class="css_td"><div id="itemtotalaverageprice-<%= i %>"><%= item.total_average_price %></div></div>
 			<div class="css_td"><div id="itemtotaltransactionquantity-<%= i %>"><%= item.total_transaction_quantity %></div></div>
@@ -90,7 +96,8 @@
 		<% i += 1 %>
 	<% } %>
 </div>
+<% end %>
 <div class="paginate-info">
-	<%= page_entries_info @overviewVegetables %>
+	<%= if !(@overviewVegetables.nil?) then page_entries_info @overviewVegetables end %>
 </div>
-<%= paginate @overviewVegetables %>
+<%= if !(@overviewVegetables.nil?) then paginate @overviewVegetables end %>

@@ -4,7 +4,7 @@ class VegetablesController < ApplicationController
 	def index
 		#@overviewVegetables = search(params[:query], params["query-time"]) # old function used with pg_search gem, but now I don't need it
 		@overviewVegetables = search_with_name_code_date(params[:query], params["query-time"])
-		gon.myDataV_json = @overviewVegetables.to_json(:except => :id)
+		gon.myDataV_json = @overviewVegetables.to_json(:except => ["id", "code"])
 		@vegetables = Vegetable.all # used for floating list at left side of webpage.
 	end
 
@@ -15,6 +15,7 @@ class VegetablesController < ApplicationController
 	end
 	
 	def trending
+		redirect_to action: "index"
 	end 
 
 
@@ -65,7 +66,7 @@ class VegetablesController < ApplicationController
 							# do nothing
 							element = Date.parse(element)
 						else # Error format
-							raise DateformatError 
+							raise ArgumentError 
 						end
 
 					elsif element.length == 4 # support element is year
@@ -74,7 +75,7 @@ class VegetablesController < ApplicationController
 						element = element..Date.civil(element.year,-1,-1)
 					else # error format
 						logger.debug "element.length < 4"
-						raise DateformatError 
+						raise ArgumentError 
 					end 
 
 					#Date.parse(element)  check whether date format of the element is right or not
@@ -82,13 +83,13 @@ class VegetablesController < ApplicationController
 				rescue ArgumentError
 					puts "Invalid date."
 					element = nil
-					flash[:error] = "Invalid date."
-					break
+					flash.now[:error] = "Invalid date."
+					return OverviewVegetable.where(:name => arrayOfQuery).order(:name, :date).page(params[:page])  
 				rescue DateformatError
-					puts "Error date format."
+					#puts "Error date format."
 					element = nil
-					flash[:error] = "Error date format."
-					break
+					flash.now[:warning] = "Error date format."
+					return OverviewVegetable.where(:name => arrayOfQuery).order(:name, :date).page(params[:page])  
 				end 
 			}
 			if aryOfTimeOfQuery.include? nil
