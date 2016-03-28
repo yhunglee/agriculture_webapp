@@ -26,11 +26,7 @@ class VegetablesController < ApplicationController
 		arrayOfQuery = Array.new
 		aryOfTimeOfQuery = Array.new
 		if !(query.nil?) && (query.kind_of? String)
-			if query.include? " "
-				arrayOfQuery = query.split
-			else 
-				arrayOfQuery = query.split
-			end
+			arrayOfQuery = query.split
 		elsif query.kind_of? Array
 			arrayOfQuery += query
 		else #if query.nil? 
@@ -92,7 +88,7 @@ class VegetablesController < ApplicationController
 					return OverviewVegetable.where(:name => arrayOfQuery).order(:name, :date).page(params[:page])  
 				end 
 			}
-			if aryOfTimeOfQuery.include? nil
+			if aryOfTimeOfQuery.include? nil # Error handling for arrayOfQuery.grep(/[\d]/) containing Fixnum. May be a dead code due to handle nothing
 				aryOfTimeOfQuery = aryOfTimeOfQuery - aryOfTimeOfQuery
 				aryOfTimeOfQuery = nil
 
@@ -112,7 +108,7 @@ class VegetablesController < ApplicationController
 			conditions = Hash[{date: aryOfTimeOfQuery, name: arrayOfQuery}.select{|k,v| v.present?}]
 		end 
 
-		OverviewVegetable.where(conditions).order(:name, :date).page(params[:page])  
+		OverviewVegetable.where(conditions).order(:date, :name).page(params[:page])  
 	end 
 =begin
 	def search(query, timeFilter) # this is used with pg_search gem, but now I don't want to use it.

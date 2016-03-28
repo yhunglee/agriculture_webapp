@@ -23,43 +23,179 @@
 #    svg_height - (d.total_average_price * 20) + 20
 #  ).attr("font-family", "sans-serif").attr("font-size", "20px").attr "fill", "white"
 #
+classify_jsonobjectarray_into_different_groups_duetoattributevalue = (aryOfJSONObject) ->
+  objOfGroupingJSONObject = new Object()
+  for element in aryOfJSONObject
+    if objOfGroupingJSONObject[element['name']]?.length
+      #alert("i=#{i} at push") #debug
+      objOfGroupingJSONObject[element['name']].push(element)
+    else
+      #alert("i=#{i} at new") #debug
+      objOfGroupingJSONObject[element['name']] = [element]
+    objOfDate[element.date] = 1
+  objOfGroupingJSONObject 
 
 myJSONObj = JSON.parse(gon.myDataV_json)
-chart = c3.generate({
-  bindto: '#chart'
-  data: {
-    json: myJSONObj
-    keys: {
-      x: 'date'
-      value: ['total_average_price','total_transaction_quantity']
-    }
-    labels: false
-    axes: {
-      total_transaction_quantity: 'y2'
-    }
-  },
-  axis: {
-    x: {
-      type: 'timeseries'
-      tick: {
-        format: '%Y-%m-%d'
+objOfDate = new Object()
+classifiedObjectOfJSONObj = classify_jsonobjectarray_into_different_groups_duetoattributevalue(myJSONObj)
+#console.log classifiedObjectOfJSONObj #debug
+#console.log Object.keys(classifiedObjectOfJSONObj) #debug
+#console.log objOfDate #debug
+arrayOfDate = Object.keys(objOfDate)
+kindOfJSONObj = Object.keys(classifiedObjectOfJSONObj) # return names of JSON objects
+if kindOfJSONObj.length <= 1
+  chart = c3.generate({
+    bindto: '#chart'
+    data: {
+      json: myJSONObj
+      keys: {
+        x: 'date'
+        value: ['total_average_price','total_transaction_quantity']
+      }
+      labels: false
+      axes: {
+        total_transaction_quantity: 'y2'
       }
     },
-    y: {
-      label: {
-        text: 'average price'
-        position: 'outer-middle'
-      }
-    },
-    y2: {
-      show: true
-      label: {
-        text: 'transaction quantity'
-        position: 'outer-middle'
+    axis: {
+      x: {
+        type: 'timeseries'
+        tick: {
+          format: '%Y-%m-%d'
+        }
+      },
+      y: {
+        label: {
+          text: 'average price'
+          position: 'outer-middle'
+        }
+      },
+      y2: {
+        show: true
+        label: {
+          text: 'transaction quantity'
+          position: 'outer-middle'
+        }
       }
     }
-  }
-})
+  })
+
+else
+
+  averagePriceOfObj = new Object()
+  transactionQuantityOfObj = new Object()
+  j = 0
+  for element in kindOfJSONObj # split JSON format of average price and transaction quantities data of every kind into column array.
+    indexOfclassifiedObjectOfJSONObj = 0
+    for i in [0..arrayOfDate.length-1] by 1
+      #console.log objOfDate[(classifiedObjectOfJSONObj[element][i]['date'])] #debug
+      #console.log classifiedObjectOfJSONObj[element][i] #debug
+      #console.log typeof classifiedObjectOfJSONObj[element][i]['date'] #debug
+      #if(objOfDate["#{classifiedObjectOfJSONObj[element][i]['date']}"]?)
+      if( classifiedObjectOfJSONObj[element][indexOfclassifiedObjectOfJSONObj]? ) # This whole if-statement block is used to align data from different kind items to same date's order.
+        difference = (new Date(classifiedObjectOfJSONObj[element][indexOfclassifiedObjectOfJSONObj]['date'])).getDate() - (new Date(arrayOfDate[i])).getDate()
+        if difference == 0
+          #console.log "i #{i} at difference==0 push #{classifiedObjectOfJSONObj[element][indexOfclassifiedObjectOfJSONObj]['name']} average price #{classifiedObjectOfJSONObj[element][indexOfclassifiedObjectOfJSONObj]['total_average_price']}" #debug
+          averagePriceOfObj[element] = averagePriceOfObj[element] || []
+          averagePriceOfObj[element].push(classifiedObjectOfJSONObj[element][indexOfclassifiedObjectOfJSONObj]['total_average_price'])
+          transactionQuantityOfObj[element] = transactionQuantityOfObj[element] || []
+          transactionQuantityOfObj[element].push(classifiedObjectOfJSONObj[element][indexOfclassifiedObjectOfJSONObj]['total_transaction_quantity'])
+          indexOfclassifiedObjectOfJSONObj += 1
+        else if( difference < 0)
+          #console.log "i #{i} at new difference < #{difference} push #{classifiedObjectOfJSONObj[element][indexOfclassifiedObjectOfJSONObj]['name']} average price" #debug
+          averagePriceOfObj[element] = averagePriceOfObj[element] || []
+          averagePriceOfObj[element].push(0)
+          transactionQuantityOfObj[element] = transactionQuantityOfObj[element] || []
+          transactionQuantityOfObj[element].push(0)
+          #indexOfclassifiedObjectOfJSONObj += 1
+        else if ( difference > 0)
+          #console.log "i #{i} at new and push, difference > #{difference} #{classifiedObjectOfJSONObj[element][i]['name']} average price" #debug
+          #console.log "difference : #{difference}" #debug
+          averagePriceOfObj[element] = averagePriceOfObj[element] || []
+          averagePriceOfObj[element].push(0)
+          transactionQuantityOfObj[element] = transactionQuantityOfObj[element] || []
+          transactionQuantityOfObj[element].push(0)          
+          #averagePriceOfObj[element] = averagePriceOfObj[element] || []
+          #averagePriceOfObj[element].push(classifiedObjectOfJSONObj[element][indexOfclassifiedObjectOfJSONObj]['total_average_price'])
+          #transactionQuantityOfObj[element] = transactionQuantityOfObj[element] || []
+          #transactionQuantityOfObj[element].push(classifiedObjectOfJSONObj[element][indexOfclassifiedObjectOfJSONObj]['total_transaction_quantity'])
+
+          #indexOfclassifiedObjectOfJSONObj += 1
+      else
+        #console.log "i #{i} at new, null of classifiedObjectOfJSONObj[element][i] "  # debug
+        averagePriceOfObj[element] = averagePriceOfObj[element] || []
+        averagePriceOfObj[element].push(0)
+        transactionQuantityOfObj[element] = transactionQuantityOfObj[element] || []
+        transactionQuantityOfObj[element].push(0)
+
+    #console.log(averagePriceOfObj[element]) #debug
+    #console.log(transactionQuantityOfObj[element]) #debug
+    #averagePriceOfObj[element].unshift("total_average_price_"+ j)
+    #transactionQuantityOfObj[element].unshift("total_transaction_quantity_"+ j)
+    #j += 1
+    averagePriceOfObj[element].unshift(element+"平均價")
+    transactionQuantityOfObj[element].unshift(element+"總交易量")
+    #console.log(averagePriceOfObj[element]) #debug
+    #console.log(transactionQuantityOfObj[element]) #debug
+
+  arrayOfDate.unshift("x") # x-axis data
+  console.log kindOfJSONObj # debug
+  arrayOfTotalData = new Array() # store total data for chart
+  arrayOfTotalData.push(arrayOfDate) # store x-axis tick data
+  i = 0
+  while i < kindOfJSONObj.length # push items to show multi lines in a chart
+    arrayOfTotalData.push(averagePriceOfObj[kindOfJSONObj[i]])
+    arrayOfTotalData.push(transactionQuantityOfObj[kindOfJSONObj[i]])
+    i += 1
+  i = 0
+  k = 0
+  chart = c3.generate({
+    bindto: '#chart'
+    data: {
+      x: 'x'
+      columns: arrayOfTotalData #[ 
+        #arrayOfDate,
+        #averagePriceOfObj[kindOfJSONObj[0]], 
+        #averagePriceOfObj[kindOfJSONObj[1]],
+        #transactionQuantityOfObj[kindOfJSONObj[0]],
+        #transactionQuantityOfObj[kindOfJSONObj[1]]
+      #]
+      label: false
+      axes: {
+        "#{kindOfJSONObj[i]}平均價" : 'y' while (i += 1) < j
+        "#{kindOfJSONObj[k]}總交易量" : 'y2' while (k += 1) < j
+        #total_average_price_1: 'y'
+        #total_average_price_2: 'y'
+        #total_transaction_quantity_1: 'y2'
+        #total_transaction_quantity_2: 'y2'
+        #"#{kindOfJSONObj[0]}平均價": 'y' if kindOfJSONObj[0]?
+        #"#{kindOfJSONObj[1]}平均價": 'y'
+        #"#{kindOfJSONObj[0]}總交易量": 'y2'
+        #"#{kindOfJSONObj[1]}總交易量": 'y2'
+      }
+    },
+    axis: {
+      x: {
+        type: 'timeseries'
+        tick: {
+          format: '%Y-%m-%d'
+        }
+      },
+      y: {
+        label: {
+          text: 'average price'
+          position: 'outer-middle'
+        }
+      },
+      y2: {
+        show: true
+        label: {
+          text: 'transation quantity'
+          position: 'outer-middle'
+        }
+      }
+    }
+  })
 
 display_or_not_veggie_list = ->
   #current_value = document.getElementsByClassName('veggie-list').style.display
