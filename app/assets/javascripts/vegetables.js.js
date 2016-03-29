@@ -120,22 +120,8 @@
         label: false,
         axes: (
           obj = {},
-          obj[kindOfJSONObj[i] + "平均價"] = (function() {
-            var results;
-            results = [];
-            while ((i += 1) < j) {
-              results.push('y');
-            }
-            return results;
-          })(),
-          obj[kindOfJSONObj[k] + "總交易量"] = (function() {
-            var results;
-            results = [];
-            while ((k += 1) < j) {
-              results.push('y2');
-            }
-            return results;
-          })(),
+          obj[kindOfJSONObj[i] + "平均價"] = kindOfJSONObj[i] != null ? 'y' : void 0,
+          obj[kindOfJSONObj[k] + "總交易量"] = kindOfJSONObj[k] != null ? 'y2' : void 0,
           obj
         )
       },

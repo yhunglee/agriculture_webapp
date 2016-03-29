@@ -162,8 +162,10 @@ else
       #]
       label: false
       axes: {
-        "#{kindOfJSONObj[i]}平均價" : 'y' while (i += 1) < j
-        "#{kindOfJSONObj[k]}總交易量" : 'y2' while (k += 1) < j
+        "#{kindOfJSONObj[i]}平均價": 'y' if kindOfJSONObj[i]? #while ( kindOfJSONObj[i]?  && ((i += 1) < j))
+        "#{kindOfJSONObj[k]}總交易量": 'y2' if kindOfJSONObj[k]? #while ( kindOfJSONObj[k]? && ((k += 1) < j))
+        #"#{kindOfJSONObj[i]}平均價": 'y' while (i += 1) < j
+        #"#{kindOfJSONObj[k]}總交易量": 'y2' while (k += 1) < j
         #total_average_price_1: 'y'
         #total_average_price_2: 'y'
         #total_transaction_quantity_1: 'y2'
