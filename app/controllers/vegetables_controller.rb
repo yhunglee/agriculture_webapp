@@ -1,6 +1,7 @@
 class DateformatError < StandardError ; end
 class VegetablesController < ApplicationController
-	
+	layout "veggie"	
+
 	def index
 		#@overviewVegetables = search(params[:query], params["query-time"]) # old function used with pg_search gem, but now I don't need it
 		@overviewVegetables = search_with_name_code_date(params[:query], params["query-time"])
