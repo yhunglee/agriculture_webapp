@@ -35,53 +35,7 @@ classify_jsonobjectarray_into_different_groups_duetoattributevalue = (aryOfJSONO
     objOfDate[element.date] = 1
   objOfGroupingJSONObject 
 
-myJSONObj = JSON.parse(gon.myDataV_json)
-objOfDate = new Object()
-classifiedObjectOfJSONObj = classify_jsonobjectarray_into_different_groups_duetoattributevalue(myJSONObj)
-#console.log classifiedObjectOfJSONObj #debug
-#console.log Object.keys(classifiedObjectOfJSONObj) #debug
-#console.log objOfDate #debug
-arrayOfDate = Object.keys(objOfDate)
-kindOfJSONObj = Object.keys(classifiedObjectOfJSONObj) # return names of JSON objects
-if kindOfJSONObj.length <= 1
-  chart = c3.generate({
-    bindto: '#chart'
-    data: {
-      json: myJSONObj
-      keys: {
-        x: 'date'
-        value: ['total_average_price','total_transaction_quantity']
-      }
-      labels: false
-      axes: {
-        total_transaction_quantity: 'y2'
-      }
-    },
-    axis: {
-      x: {
-        type: 'timeseries'
-        tick: {
-          format: '%Y-%m-%d'
-        }
-      },
-      y: {
-        label: {
-          text: 'average price'
-          position: 'outer-middle'
-        }
-      },
-      y2: {
-        show: true
-        label: {
-          text: 'transaction quantity'
-          position: 'outer-middle'
-        }
-      }
-    }
-  })
-
-else
-
+preprocess_data_of_many_different_vegetables_for_displaying_chart = (classifiedObjectOfJSONObj,arrayOfDate,kindOfJSONObj) ->
   averagePriceOfObj = new Object()
   transactionQuantityOfObj = new Object()
   j = 0
@@ -147,8 +101,61 @@ else
     arrayOfTotalData.push(averagePriceOfObj[kindOfJSONObj[i]])
     arrayOfTotalData.push(transactionQuantityOfObj[kindOfJSONObj[i]])
     i += 1
-  i = 0
-  k = 0
+
+  arrayOfTotalData # return value
+  
+
+myJSONObj = JSON.parse(gon.myDataV_json)
+objOfDate = new Object()
+classifiedObjectOfJSONObj = classify_jsonobjectarray_into_different_groups_duetoattributevalue(myJSONObj)
+#console.log classifiedObjectOfJSONObj #debug
+#console.log Object.keys(classifiedObjectOfJSONObj) #debug
+#console.log objOfDate #debug
+arrayOfDate = Object.keys(objOfDate) # arayOfDate is an array of existing date in objOfDate.
+kindOfJSONObj = Object.keys(classifiedObjectOfJSONObj) # return names of JSON objects. kindOfJSONObj is an array containing different name of vegetables.
+
+if kindOfJSONObj.length <= 1
+  chart = c3.generate({
+    bindto: '#chart'
+    data: {
+      json: myJSONObj
+      keys: {
+        x: 'date'
+        value: ['total_average_price','total_transaction_quantity']
+      }
+      labels: false
+      axes: {
+        total_transaction_quantity: 'y2'
+      }
+    },
+    axis: {
+      x: {
+        type: 'timeseries'
+        tick: {
+          format: '%Y-%m-%d'
+        }
+      },
+      y: {
+        label: {
+          text: 'average price'
+          position: 'outer-middle'
+        }
+      },
+      y2: {
+        show: true
+        label: {
+          text: 'transaction quantity'
+          position: 'outer-middle'
+        }
+      }
+    }
+  })
+
+else
+
+  arrayOfTotalData = preprocess_data_of_many_different_vegetables_for_displaying_chart(classifiedObjectOfJSONObj, arrayOfDate, kindOfJSONObj)
+  i = 0 # for iterating index of data
+  k = 0 # for iterating index of data, too
   chart = c3.generate({
     bindto: '#chart'
     data: {
