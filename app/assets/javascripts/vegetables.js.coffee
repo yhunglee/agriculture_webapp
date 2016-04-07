@@ -148,6 +148,9 @@ if kindOfJSONObj.length <= 1
           position: 'outer-middle'
         }
       }
+    },
+    zoom: {
+      enabled: true
     }
   })
 
@@ -203,6 +206,9 @@ else
           position: 'outer-middle'
         }
       }
+    },
+    zoom: {
+      enabled: true
     }
   })
 
@@ -263,7 +269,7 @@ append_previous_params_of_form_to_lastest_request = (previousParams) ->
       #if result? #debug
         $('#filter-veggie-query').append('<input type="hidden" name="query[]" value="' + previousParams[property] + '">')
       else
-        $('#filter-veggie-query').append('<input type="hidden" name="' + property + '" value="' + previousParams[property] + '">')
+        $('#filter-veggie-query').append('<input type="hidden" name="' + property + '" value="' + decodeURIComponent(previousParams[property].replace(/\+/g," ")) + '">')
 
 submit_query_time_form_of_select_option = ->
   response = get_parameters_from_url()

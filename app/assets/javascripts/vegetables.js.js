@@ -112,6 +112,9 @@
             position: 'outer-middle'
           }
         }
+      },
+      zoom: {
+        enabled: true
       }
     });
   } else {
@@ -151,6 +154,9 @@
             position: 'outer-middle'
           }
         }
+      },
+      zoom: {
+        enabled: true
       }
     });
   }
@@ -210,7 +216,7 @@
         if (property.match(queryMultipleValuePattern) != null) {
           results.push($('#filter-veggie-query').append('<input type="hidden" name="query[]" value="' + previousParams[property] + '">'));
         } else {
-          results.push($('#filter-veggie-query').append('<input type="hidden" name="' + property + '" value="' + previousParams[property] + '">'));
+          results.push($('#filter-veggie-query').append('<input type="hidden" name="' + property + '" value="' + decodeURIComponent(previousParams[property].replace(/\+/g, " ")) + '">'));
         }
       }
       return results;
