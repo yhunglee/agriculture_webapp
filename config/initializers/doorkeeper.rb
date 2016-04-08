@@ -18,10 +18,7 @@ Doorkeeper.configure do
   #   # Put your admin authentication logic here.
   #   # Example implementation:
   #   Admin.find_by_id(session[:admin_id]) || redirect_to(new_admin_session_url)
-	  if !(user_signed_in? && current_user.admin?)
-		  flash.now[:warning] = "You are not an admin."
-	  	  redirect_to root_url
-	  end 
+	  redirect_to root_url unless (user_signed_in? && current_user.admin?)
   end
   #
 
