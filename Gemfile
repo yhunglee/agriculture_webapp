@@ -67,6 +67,9 @@ gem 'pg' # For activerecord using postgres
 gem 'rspec-rails' # Testing rails
 gem 'doorkeeper' # OAuth provider
 gem 'devise' # User management
+gem 'recaptcha', require: "recaptcha/rails" # validate whether user is a robot or not when it try to sign up
+gem 'dotenv-rails', :groups => [:development, :test] # load values of ENV. We only use it with recaptcha gem in development and test environment.
+
 gem 'kaminari' # for web pages pagination
 gem 'wine_bouncer', '~> 0.5.1' # A Ruby gem that allows Oauth2 protection with Doorkeeper for Grape Api's
 
