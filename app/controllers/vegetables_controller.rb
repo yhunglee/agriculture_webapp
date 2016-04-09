@@ -97,7 +97,7 @@ class VegetablesController < ApplicationController
 		end
 
 		queryPeriod = timeFilter.to_i 
-		periodRange = Array.new([10,30,90,180,354,365,730,1825]) # same values with ones of select options in app/views/vegetables/index.html.erb
+		periodRange = Array.new([10,30,90,180,354,365,730]) # same values with ones of select options in app/views/vegetables/index.html.erb
 		if timeFilter && !(timeFilter.empty?)
 			if queryPeriod > 0 && periodRange.include?(queryPeriod)
 
