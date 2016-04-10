@@ -117,7 +117,7 @@ ul.veggie-list {
     background-color: red;
     font-size: 12px; }
 
-label {
+.veggie-list label {
   display: inline-block;
   float: left;
   overflow: auto; }
@@ -229,7 +229,7 @@ select.query-time {
       background-color: red;
       font-size: 14px; }
 
-  label {
+  .veggie-list label {
     display: inline-block;
     float: left;
     overflow: auto; }
@@ -316,7 +316,7 @@ select.query-time {
       background-color: red;
       font-size: 14px; }
 
-  label {
+  .veggie-list label {
     display: inline-block;
     float: left;
     overflow: auto; }

@@ -6,91 +6,24 @@
 h2
   text-align: center
 
-.edit_user,.new_user
-  position: absolute
-  top: 35%
-  left: 50%
-  transform: translate(-50%,-35%)
+.new_user,.edit_user
+  position: relative
+  margin: 0 auto
+  text-align: center
   label
     display: inline-block
     text-align: right
     width: 140px
+  .g-recaptcha
+    display: inline-block
+    text-align: center
 
 .cancel-account
   text-align: center
 
 .actions
-  position: static
   text-align: center
 
 .links
-  position: absolute
-  top: 80%
-  left: 50%
-  transform: translate(-50%,-50%)
+  text-align: center
 
-@media only screen and (min-width: 400px) and (max-width: 767px)
-  //body
-    background: url('background.jpg') 
-    background-size: 100% 600%
-    background-repeat: no-repeat
-
-  h2
-    text-align: center
-
-  .edit_user,.new_user
-    position: absolute
-    top: 20%
-    left: 50%
-    transform: translate(-50%, -20%)
-    label
-      display: inline-block
-      text-align: right
-      width: 140px
-  .cancel-account
-    text-align: center
-
-  .actions
-    position: static
-    text-align: center
-
-  .links
-    position: absolute
-    top: 50%
-    left: 50%
-    transform: translate(-50%,-20%)
-@media only screen and (min-width: 768px)
-  //body 
-    background: url('background.jpg')
-    background-size: 100% auto
-    background-repeat: no-repeat
-
-  h2
-    text-align: center
-
-  .edit_user,.new_user
-    position: absolute
-    top: 25%
-    left: 50%
-    transform: translate(-50%,-25%)
-    label
-      display: inline-block
-      text-align: right
-      width: 140px
-
-  .cancel-account
-    text-align: center
-
-  .actions
-    display: block
-    float: none
-    position: static
-    margin-left: auto
-    margin-right: auto
-    text-align: center
-
-  .links
-    position: absolute
-    top: 60%
-    left: 50%
-    transform: translate(-50%,-50%)
