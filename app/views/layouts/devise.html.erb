@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html itemscope="itemscope" itemtype="http://schema.org/WebSite">
+<head>
+        <meta name="view-port" content="width=device-width, initial-scale=1.0">
+	<meta name="google-site-verification" content="oVAx95dUco_WOtf26g7F9cOFBT_AVqAbe1y6_JDLOu4" />
+	<meta property="og:title" content="臺灣農產品大盤交易價格視覺化作品|Data visualization for wholesale prices of agriculture products in Taiwan" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="http://agriculture.csie.io" />
+	<meta property="og:image" content="<%= image_path("agriPreview2.png") %>" />
+	<meta property="og:description" content="臺灣農產品大盤交易價格視覺化作品|Data Visualization for Taiwan's agriculture products" />
+	<meta property="og:locale" content="zh_TW" />
+	<meta property="og:locale:alternate" content="en_US" />
+	<meta itemtype="description" content="臺灣農產品大盤交易價格視覺化作品|Data visualization for wholesale prices of agriculture products in Taiwan" />
+
+        <%= favicon_link_tag 'favicon-16.png' %>
+	<%= favicon_link_tag 'favicon-32.png' %>
+	<%= favicon_link_tag 'favicon-48.png' %>
+	<%= favicon_link_tag 'favicon-60@2x.png' %>
+	<%= favicon_link_tag 'favicon-60@3x.png' %>
+	<%= favicon_link_tag 'apple-touch-icon-76.png', rel: 'apple-touch-icon', type: "image/png" %>
+	<%= favicon_link_tag 'apple-touch-icon-76@2x.png', rel: 'apple-touch-icon', type: "image/png" %>
+	<%= favicon_link_tag 'apple-touch-icon-83.5@2x.png', rel: 'apple-touch-icon', type: "image/png" %>
+	<%= favicon_link_tag 'apple-touch-icon-83.5@2x.png', rel: 'apple-touch-icon-precomposed', type: "image/png" %>
+	<%= favicon_link_tag 'Android192x192.png', rel: 'icon', type: "image/png" %>
+	<title>AgricultureWebapp</title>
+  	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  	<%= csrf_meta_tags %>
+</head>
+<%= content_for :title do %>
+	<div id="banner">
+		<div id="logo">
+		</div>
+		<div id="title">
+		</div>
+	</div>
+	<div id="warning">
+		<%= flash[:warning] %>
+	</div>
+	<div id="error">
+		<%= flash[:error] %>
+	</div>
+<% end %>
+
+
+<%= content_for :login_status do %>
+  <p class="navbar-text pull-right">
+	  <% if user_signed_in? %>
+		  Logged in as <strong><%= current_user.email %> </strong>
+		  <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> | 
+		  <%= link_to 'Logout', destroy_user_session_path, method: :delete, :class => 'navbar-link' %>
+		  <% if current_user.admin? %>
+			  | You are an admin.
+		  <% end %>
+	  <% else %>
+		  <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
+		  <%= link_to "Login", new_user_session_path, :class => 'navbar-link' %>
+	  <% end %>
+
+
+  <% if notice %>
+	  <p class="alert alert-success notice"><%= notice %></p>
+  <% end %>
+  <% if alert %>
+	  <p class="alert alert-danger"><%= alert %></p>
+  <% end %>
+  </p>
+<% end %>
+
+
+<body>
+<%= yield :login_status %>
+<%= yield :title %>
+<%= yield %>
+
+</body>
+</html>
+

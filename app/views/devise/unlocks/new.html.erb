@@ -4,10 +4,11 @@
   <%= devise_error_messages! %>
 
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+	  <p><%= f.label :email %>
+	  <%= f.email_field :email, autofocus: true %>
+	  </p>
   </div>
-
+  <br />
   <div class="actions">
     <%= f.submit "Resend unlock instructions" %>
   </div>

@@ -268,3 +268,12 @@ Devise.setup do |config|
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
 end
+
+# Customize views of devise at Rails 4. Refer from underground content inside the link: https://github.com/plataformatec/devise/wiki/How-To:-Create-custom-layouts
+Rails.application.config.to_prepare do
+	Devise::SessionsController.layout "devise"
+	Devise::RegistrationsController.layout "devise"
+	Devise::ConfirmationsController.layout "devise"
+	Devise::UnlocksController.layout "devise"
+	Devise::PasswordsController.layout "devise"
+end 
