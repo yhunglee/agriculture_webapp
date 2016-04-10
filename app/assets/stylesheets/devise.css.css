@@ -1,21 +1,5 @@
-body {
-  background: url("background.jpg");
-  background-size: 100% 600%;
-  background-repeat: no-repeat; }
-
 h2 {
   text-align: center; }
-
-form {
-  position: absolute;
-  top: 35%;
-  left: 50%;
-  transform: translate(-50%, -35%); }
-
-label {
-  display: inline-block;
-  text-align: right;
-  width: 140px; }
 
 .actions {
   position: static;
@@ -28,24 +12,8 @@ label {
   transform: translate(-50%, -50%); }
 
 @media only screen and (min-width: 400px) and (max-width: 767px) {
-  body {
-    background: url("background.jpg");
-    background-size: 100% 600%;
-    background-repeat: no-repeat; }
-
   h2 {
     text-align: center; }
-
-  form {
-    position: absolute;
-    top: 20%;
-    left: 50%;
-    transform: translate(-50%, -20%); }
-
-  label {
-    display: inline-block;
-    text-align: right;
-    width: 140px; }
 
   .actions {
     position: static;
@@ -57,24 +25,8 @@ label {
     left: 50%;
     transform: translate(-50%, -20%); } }
 @media only screen and (min-width: 768px) {
-  body {
-    background: url("background.jpg");
-    background-size: 100% auto;
-    background-repeat: no-repeat; }
-
   h2 {
     text-align: center; }
-
-  form {
-    position: absolute;
-    top: 25%;
-    left: 50%;
-    transform: translate(-50%, -25%); }
-
-  label {
-    display: inline-block;
-    text-align: right;
-    width: 140px; }
 
   .actions {
     display: block;
