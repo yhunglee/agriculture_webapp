@@ -1,5 +1,5 @@
 body {
-  background: image_url("background.jpg");
+  background: url("background.jpg");
   background-size: 100% 600%;
   background-repeat: no-repeat; }
 
@@ -29,7 +29,7 @@ label {
 
 @media only screen and (min-width: 400px) and (max-width: 767px) {
   body {
-    background: image_url("background.jpg");
+    background: url("background.jpg");
     background-size: 100% 600%;
     background-repeat: no-repeat; }
 
@@ -58,7 +58,7 @@ label {
     transform: translate(-50%, -20%); } }
 @media only screen and (min-width: 768px) {
   body {
-    background: image_url("background.jpg");
+    background: url("background.jpg");
     background-size: 100% auto;
     background-repeat: no-repeat; }
 
