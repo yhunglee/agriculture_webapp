@@ -140,6 +140,14 @@ select.query-time
 #css_table
   display: none
 
+.slideshow
+  @for $i from 1 through 50
+    .item-#{$i}
+      display: inline-block
+      width: 139px
+      font-size: 16px
+      border: 2px solid mediumaquamarine
+
 @media only screen and (min-width: 400px ) and (max-width: 767px)
   #css_table
     display: table
