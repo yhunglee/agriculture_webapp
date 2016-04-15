@@ -144,9 +144,12 @@ select.query-time
   @for $i from 1 through 50
     .item-#{$i}
       display: inline-block
-      width: 139px
+      width: 142px
       font-size: 16px
-      border: 2px solid mediumaquamarine
+      background-color: mediumaquamarine
+      margin: 2px
+      clip-path: polygon(0 0, 0 100%, 100% 100%,100% 25%, 75% 0)
+      -webkit-clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 25%, 75% 0)
 
 @media only screen and (min-width: 400px ) and (max-width: 767px)
   #css_table
