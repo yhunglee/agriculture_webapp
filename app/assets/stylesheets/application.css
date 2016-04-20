@@ -11,6 +11,8 @@
  * file per style scope.
  *
  *= require_tree .
+ *= require slick
+ *= require slick-theme
  *= require c3
  *= require_self
  */

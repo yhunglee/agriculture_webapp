@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   use_doorkeeper
   devise_for :users
-  resources :users 
 
   mount API::Base => '/api'
   # The priority is based upon order of creation: first created -> highest priority.

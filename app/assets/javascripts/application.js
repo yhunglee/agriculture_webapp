@@ -12,7 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
+//= require jquery.turbolinks
+//= require slick.min
 //= require d3
 //= require c3
+//= require turbolinks
 //= require_tree .

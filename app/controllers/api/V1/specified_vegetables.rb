@@ -21,7 +21,7 @@ class SpecifiedVegetables < Grape::API
 			end 
 
 			if veggies.empty?
-				raise RecordNotFoundForToday
+				raise API::RecordNotFoundForToday
 			else
 				veggies
 			end 
@@ -38,7 +38,7 @@ class SpecifiedVegetables < Grape::API
 			conditions = Hash[{transaction_date: params[:transaction_date], name: params[:name], trade_location: params[:trade_location]}.select{|k,v| v.present?}]
 			veggies = SpecifiedVegetable.where(conditions) 
 			if veggies.empty?
-				raise RecordNotFoundForConditions
+				raise API::RecordNotFoundForConditions
 			else 
 				paginate(veggies)
 			end 

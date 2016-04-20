@@ -283,3 +283,12 @@ submit_query_time_form_of_select_option = ->
 
 $(document).off('change', '.query-time').on 'change', '.query-time', submit_query_time_form_of_select_option
 
+# for bulletin board slide
+$('.slideshow').slick
+  slidesToShow: 9
+  slidesToScroll: 9
+  variableWidth: true
+  rows: 2
+  autoplay: true
+  autoplaySpeed: 2000
+  responsive: [{breakpoint: 400, settings:{ slidesToShow: 2,slidesToScroll: 2,autoplay: true,autoplaySpeed: 2000}},{breakpoint: 768,settings:{slidesToShow: 5,slidesToScroll: 5,autoplay: true,autoplaySpeed: 2000}}]

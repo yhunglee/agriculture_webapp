@@ -13,7 +13,7 @@ class VegetablesController < ApplicationController
 	end 
 
 	def bulletin_board
-		@specifiedVegetables = SpecifiedVegetable.all.order(:transaction_date).page(params[:page])
+		@specifiedVegetables = SpecifiedVegetable.all.order(transaction_date: :desc).page(params[:page])
 	end
 	
 	def trending
