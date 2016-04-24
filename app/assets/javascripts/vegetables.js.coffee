@@ -292,3 +292,33 @@ $('.slideshow').slick
   autoplay: true
   autoplaySpeed: 2000
   responsive: [{breakpoint: 400, settings:{ slidesToShow: 2,slidesToScroll: 2,autoplay: true,autoplaySpeed: 2000}},{breakpoint: 768,settings:{slidesToShow: 5,slidesToScroll: 5,autoplay: true,autoplaySpeed: 2000}}]
+
+# display options for bulletin board slide
+switch_displayoption_using_id_for_slideshow = (idName) ->
+  display_value = $('.showdata .slideshow [class^=item-] ' + idName).css('display')
+  if !(display_value?) # if display_value is undefined
+    #do nothing
+  else if display_value != 'none'
+    $('.showdata .slideshow [class^=item-] ' + idName).css('display', 'none')
+  else 
+    $('.showdata .slideshow [class^=item-] ' + idName).css('display', 'block')
+
+$('.display-option .location').click ->
+  switch_displayoption_using_id_for_slideshow('#location')
+$('.display-option .middleprice').click ->
+  switch_displayoption_using_id_for_slideshow('#middleprice')
+$('.display-option .upperprice').click ->
+  switch_displayoption_using_id_for_slideshow('#upperprice')
+$('.display-option .lowerprice').click ->
+  switch_displayoption_using_id_for_slideshow('#lowerprice')
+$('.display-option .averageprice').click ->
+  switch_displayoption_using_id_for_slideshow('#averageprice')
+$('.display-option .quantity').click ->
+  switch_displayoption_using_id_for_slideshow('#quantity')
+$('.display-option .kind').click ->
+  switch_displayoption_using_id_for_slideshow('#kind')
+$('.display-option .processtype').click ->
+  switch_displayoption_using_id_for_slideshow('#processtype')
+$('.display-option .date').click ->
+  switch_displayoption_using_id_for_slideshow('#date')
+
