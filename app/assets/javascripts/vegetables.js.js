@@ -238,15 +238,16 @@
     slidesToShow: 9,
     slidesToScroll: 9,
     variableWidth: true,
-    rows: 2,
+    rows: 4,
     autoplay: true,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 7000,
     responsive: [
       {
         breakpoint: 400,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
+          rows: 2,
           autoplay: true,
           autoplaySpeed: 2000
         }
@@ -255,8 +256,9 @@
         settings: {
           slidesToShow: 5,
           slidesToScroll: 5,
+          rows: 2,
           autoplay: true,
-          autoplaySpeed: 2000
+          autoplaySpeed: 5000
         }
       }
     ]

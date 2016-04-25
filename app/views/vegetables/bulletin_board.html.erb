@@ -1,13 +1,13 @@
 <h1>Bulletin Board</h1>
-<h1>Under construction</h1>
-<div class="type">
-	for links of vegetable, fruit and flowers
-	<a></a>
-	<a></a>
-	<a></a>
-</div>
-<div class="query-time-range">
-	Today and yesterday
+<div class="market-query-form">
+	<%= form_tag bulletinboard_url, :method => 'get' do %>
+		<%= text_field_tag "name", nil, placeholder: 'Enter item name', autofocus: true, autosave: true %>
+		<%= text_field_tag "code", nil, placeholder: 'Enter item code', autosave: true %>
+		<%= text_field_tag "market", nil, placeholder: 'Enter market name', autosave: true %>
+		<%= text_field_tag "kind", nil, placeholder: 'Enter kind', autosave: true %>
+		<%= date_field_tag "date", nil, placeholder: 'Date format: 1996-01-01', autosave: true, min: '1996-01-01', max: Date.yesterday, step: 1 %>
+		<%= submit_tag "Search", :name => nil %>
+	<% end %>
 </div>
 <div class="display-option">
 	<div class="location">
@@ -47,10 +47,9 @@
 	</div>
 </div>
 
-<%= paginate @specifiedVegetables %>
 
 <div class="showdata">
-	Elements show
+	Carousel show
 	<div class="slideshow">
 		<% i = 1 %>
 		<% @specifiedVegetables.each do |element| %>

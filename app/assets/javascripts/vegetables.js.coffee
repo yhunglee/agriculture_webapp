@@ -288,10 +288,10 @@ $('.slideshow').slick
   slidesToShow: 9
   slidesToScroll: 9
   variableWidth: true
-  rows: 2
+  rows: 4
   autoplay: true
-  autoplaySpeed: 2000
-  responsive: [{breakpoint: 400, settings:{ slidesToShow: 2,slidesToScroll: 2,autoplay: true,autoplaySpeed: 2000}},{breakpoint: 768,settings:{slidesToShow: 5,slidesToScroll: 5,autoplay: true,autoplaySpeed: 2000}}]
+  autoplaySpeed: 7000
+  responsive: [{breakpoint: 400, settings:{ slidesToShow: 2,slidesToScroll: 2,rows: 2,autoplay: true,autoplaySpeed: 2000}},{breakpoint: 768,settings:{slidesToShow: 5,slidesToScroll: 5,rows: 2,autoplay: true,autoplaySpeed: 5000}}]
 
 # display options for bulletin board slide
 switch_displayoption_using_id_for_slideshow = (idName) ->

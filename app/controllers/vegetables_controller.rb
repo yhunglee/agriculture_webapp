@@ -13,7 +13,9 @@ class VegetablesController < ApplicationController
 	end 
 
 	def bulletin_board
-		@specifiedVegetables = SpecifiedVegetable.all.order(transaction_date: :desc).page(params[:page])
+		#@specifiedVegetables = SpecifiedVegetable.all.order(transaction_date: :desc).page(params[:page])
+		@specifiedVegetables = specified_vegetables_search(params["name"], params["code"], params["market"], params["kind"], params["date"])
+		#@specifiedVegetables = SpecifiedVegetable.where(transaction_date: '20160401')
 	end
 	
 	def trending
@@ -150,4 +152,19 @@ class VegetablesController < ApplicationController
 	end 
 =end
 
+	def specified_vegetables_search(names,codes,markets,kinds,dates)
+		if( (names.nil?) && (codes.nil?) && (markets.nil?) && (kinds.nil?) && (dates.nil?))
+			# For first time loading page of bulletin board
+			return SpecifiedVegetable.where(transaction_date: Date.yesterday)
+		else
+			if( dates.nil? || dates.empty? )
+				# for queries without entering dates.
+				flash.now[:warning] = 'Must enter at least a date.'
+				return SpecifiedVegetable.where(transaction_date: Date.yesterday)
+			end 
+			conditions = Hash[{name: names, code: codes, trade_location: markets, kind: kinds, transaction_date: dates}.select{|k,v| v.present?}]
+			SpecifiedVegetable.where(conditions).order(:transaction_date, :name)
+		end
+
+	end 
 end

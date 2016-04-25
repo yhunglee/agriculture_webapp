@@ -140,16 +140,16 @@ select.query-time
 #css_table
   display: none
 
+
 .slideshow
-  @for $i from 1 through 50
-    .item-#{$i}
-      display: inline-block
-      width: 146px
-      font-size: 16px
-      background-color: mediumaquamarine
-      margin: 2px
-      clip-path: polygon(0 0, 0 100%, 100% 100%,100% 25%, 75% 0)
-      -webkit-clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 25%, 75% 0)
+  [class^=item-]
+    display: inline-block
+    width: 146px
+    font-size: 16px
+    background-color: mediumaquamarine
+    margin: 2px
+    clip-path: polygon(0 0, 0 100%, 100% 100%,100% 25%, 75% 0)
+    -webkit-clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 25%, 75% 0)
 
 .display-option
   .location,.middleprice,.upperprice,.lowerprice,.averageprice,.quantity,.kind,.processtype,.date
