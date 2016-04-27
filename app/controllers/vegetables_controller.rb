@@ -16,6 +16,10 @@ class VegetablesController < ApplicationController
 		#@specifiedVegetables = SpecifiedVegetable.all.order(transaction_date: :desc).page(params[:page])
 		@specifiedVegetables = specified_vegetables_search(params["name"], params["code"], params["market"], params["kind"], params["date"])
 		#@specifiedVegetables = SpecifiedVegetable.where(transaction_date: '20160401')
+		respond_to do |format|
+			format.html 
+			format.js {}
+		end 
 	end
 	
 	def trending
@@ -37,10 +41,10 @@ class VegetablesController < ApplicationController
 			return OverviewVegetable.all.order(:name, :date).page(params[:page])
 		end
 
-		aryOfTimeOfQuery = arrayOfQuery.grep /[\d]/
-		arrayOfQuery -= aryOfTimeOfQuery 
+		aryOfTimeOfQuery = arrayOfQuery.grep /[\d]/ 
+		arrayOfQuery -= aryOfTimeOfQuery # remove date/number from arrayOfQuery 
 		if aryOfTimeOfQuery.empty?
-			aryOfTimeOfQuery = nil
+			aryOfTimeOfQuery = nil # means there is no date/number.
 		else
 			aryOfTimeOfQuery.map!{ |element|
 				begin #Date.parse(element)  check whether date format of the element is right or not
@@ -162,7 +166,30 @@ class VegetablesController < ApplicationController
 				flash.now[:warning] = 'Must enter at least a date.'
 				return SpecifiedVegetable.where(transaction_date: Date.yesterday)
 			end 
-			conditions = Hash[{name: names, code: codes, trade_location: markets, kind: kinds, transaction_date: dates}.select{|k,v| v.present?}]
+
+			arrayOfnames = Array.new
+			arrayOfcodes = Array.new
+			arrayOfmarkets = Array.new
+			arrayOfkinds = Array.new
+			arrayOfdates = Array.new
+
+			if( !(names.nil?) && !(names.empty?) )
+				arrayOfnames = names.split
+			end
+		        if( !(codes.nil?) && !(codes.empty?) )	
+				arrayOfcodes = codes.split
+			end
+			if( !(markets.nil?) && !(markets.empty?) )
+				arrayOfmarkets = markets.split
+			end
+			if( !(kinds.nil?) && !(kinds.empty?) )
+				arrayOfkinds = kinds.split
+			end 
+			if( !(dates.nil?) && !(dates.empty?) )
+				arrayOfdates = dates.split
+			end
+
+			conditions = Hash[{name: arrayOfnames, code: arrayOfcodes, trade_location: arrayOfmarkets, kind: arrayOfkinds, transaction_date: arrayOfdates}.select{|k,v| v.present?}]
 			SpecifiedVegetable.where(conditions).order(:transaction_date, :name)
 		end
 

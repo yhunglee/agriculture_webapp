@@ -322,3 +322,9 @@ $('.display-option .processtype').click ->
 $('.display-option .date').click ->
   switch_displayoption_using_id_for_slideshow('#date')
 
+# Search ajax-form for bulletin board page
+$(document).ready ->
+  $(".slideshow").on "ajax:success", (e, data, status, xhr) ->
+    $(".slideshow").append xhr.responseText
+  .on "ajax:error", (e, data, status, xhr) ->
+    $(".slideshow").append "<p>ERROR</p>"
