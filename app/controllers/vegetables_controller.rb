@@ -38,7 +38,7 @@ class VegetablesController < ApplicationController
 		elsif query.kind_of? Array
 			arrayOfQuery += query
 		else #if query.nil? 
-			return OverviewVegetable.all.order(:name, :date).page(params[:page])
+			return OverviewVegetable.all.order(:name, date: :desc).page(params[:page])
 		end
 
 		aryOfTimeOfQuery = arrayOfQuery.grep /[\d]/ 
@@ -88,12 +88,12 @@ class VegetablesController < ApplicationController
 					puts "Invalid date."
 					element = nil
 					flash.now[:error] = "Invalid date."
-					return OverviewVegetable.where(:name => arrayOfQuery).order(:name, :date).page(params[:page])  
+					return OverviewVegetable.where(:name => arrayOfQuery).order(:name, date: :desc).page(params[:page])  
 				rescue DateformatError
 					#puts "Error date format."
 					element = nil
 					flash.now[:warning] = "Error date format."
-					return OverviewVegetable.where(:name => arrayOfQuery).order(:name, :date).page(params[:page])  
+					return OverviewVegetable.where(:name => arrayOfQuery).order(:name, date: :desc).page(params[:page])  
 				end 
 			}
 			if aryOfTimeOfQuery.include? nil # Error handling for arrayOfQuery.grep(/[\d]/) containing Fixnum. May be a dead code due to handle nothing
@@ -116,7 +116,7 @@ class VegetablesController < ApplicationController
 			conditions = Hash[{date: aryOfTimeOfQuery, name: arrayOfQuery}.select{|k,v| v.present?}]
 		end 
 
-		OverviewVegetable.where(conditions).order(:date, :name).page(params[:page])  
+		OverviewVegetable.where(conditions).order('date DESC', :name).page(params[:page])  
 	end 
 =begin
 	def search(query, timeFilter) # this is used with pg_search gem, but now I don't want to use it.

@@ -312,12 +312,4 @@
     return switch_displayoption_using_id_for_slideshow('#date');
   });
 
-  $(document).ready(function() {
-    return $(".slideshow").on("ajax:success", function(e, data, status, xhr) {
-      return $(".slideshow").append(xhr.responseText);
-    }).on("ajax:error", function(e, data, status, xhr) {
-      return $(".slideshow").append("<p>ERROR</p>");
-    });
-  });
-
 }).call(this);
