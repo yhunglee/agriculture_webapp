@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160408115833) do
+ActiveRecord::Schema.define(version: 20160501081930) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,6 +79,18 @@ ActiveRecord::Schema.define(version: 20160408115833) do
   add_index "oauth_applications", ["owner_id", "owner_type"], name: "index_oauth_applications_on_owner_id_and_owner_type", using: :btree
   add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true, using: :btree
 
+  create_table "overview_fruit", force: :cascade do |t|
+    t.string "name",                       null: false
+    t.string "code",                       null: false
+    t.date   "date",                       null: false
+    t.string "kind"
+    t.string "process_type"
+    t.float  "total_average_price",        null: false
+    t.float  "total_transaction_quantity", null: false
+  end
+
+  add_index "overview_fruit", ["name", "code", "date"], name: "index_overview_fruit_on_name_and_code_and_date", unique: true, using: :btree
+
   create_table "overview_vegetable", force: :cascade do |t|
     t.text  "name"
     t.text  "code"
@@ -88,6 +100,24 @@ ActiveRecord::Schema.define(version: 20160408115833) do
   end
 
   add_index "overview_vegetable", ["name", "code", "date"], name: "index_overview_vegetable_on_name_and_code_and_date", unique: true, using: :btree
+
+  create_table "specified_fruit", force: :cascade do |t|
+    t.string "name",             null: false
+    t.string "code",             null: false
+    t.date   "transaction_date", null: false
+    t.string "kind"
+    t.string "trade_location"
+    t.string "weather",          null: false
+    t.float  "upper_price",      null: false
+    t.float  "middle_price",     null: false
+    t.float  "lower_price",      null: false
+    t.float  "average_price",    null: false
+    t.float  "trade_quantity",   null: false
+  end
+
+  add_index "specified_fruit", ["name", "code", "transaction_date"], name: "index_specified_fruit_on_name_and_code_and_transaction_date", using: :btree
+  add_index "specified_fruit", ["trade_location"], name: "index_specified_fruit_on_trade_location", using: :btree
+  add_index "specified_fruit", ["weather"], name: "index_specified_fruit_on_weather", using: :btree
 
   create_table "specified_vegetable", force: :cascade do |t|
     t.text  "name",                   null: false
