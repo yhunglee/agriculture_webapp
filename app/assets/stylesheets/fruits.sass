@@ -1,4 +1,4 @@
-// Place all the styles related to the vegetables controller here.
+// Place all the styles related to the fruits controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 body
@@ -33,6 +33,9 @@ body
 .col-12
   width: 100%
 
+.link-category-page
+  text-align: right
+
 .row:after
   content: ""
   clear: both
@@ -42,8 +45,6 @@ body
   float: left
   padding: 15px
 
-.link-category-page
-  text-align: right
 
 #warning
   background-color: yellow
@@ -89,7 +90,7 @@ ul.navi-bar
         color: while
         background-color: lime
 
-ul.veggie-list
+ul.fruit-list
   display: none 
   position: fixed
   overflow: auto
@@ -100,7 +101,7 @@ ul.veggie-list
   height: 80%
   border: 2px solid grey
 
-.btn-submit-veggie-query
+.btn-submit-fruit-query
   display: none
   button[type*=submit]
     position: fixed
@@ -111,7 +112,7 @@ ul.veggie-list
     background-color: red
     font-size: 12px
 
-.veggie-list 
+.fruit-list 
   label
     display: inline-block
     float: left
@@ -119,7 +120,7 @@ ul.veggie-list
 
 
 
-#btn-veggie-list
+#btn-fruit-list
   position: fixed
   bottom: 10%
   left: 0%
@@ -131,10 +132,10 @@ ul.veggie-list
   &:hover
     opacity: 1
 
-#query-time
+#fruit-query-time
   position: static
   float: right 
-select.query-time
+select.fruit-query-time
   position: static
   display: block
   float: right
@@ -179,7 +180,7 @@ select.query-time
       background-color: LightGreen
 
   ul
-    #btn-veggie-list
+    #btn-fruit-list
       position: fixed
       bottom: 10%
       left: 0%
@@ -221,7 +222,7 @@ select.query-time
           color: white
           background-color: lime
 
-  ul.veggie-list
+  ul.fruit-list
     display: none
     position: fixed
     overflow: auto
@@ -232,7 +233,7 @@ select.query-time
     height: 80%
     border: 2px solid grey
 
-  .btn-submit-veggie-query
+  .btn-submit-fruit-query
     display: none
     button[type*=submit]
       position: fixed
@@ -243,13 +244,13 @@ select.query-time
       background-color: red
       font-size: 14px
  
-  .veggie-list
+  .fruit-list
     label
       display: inline-block
       float: left
       overflow: auto
 
-  #btn-veggie-list
+  #btn-fruit-list
     position: fixed
     bottom: 10%
     left: 0%
@@ -308,7 +309,7 @@ select.query-time
           color: white
           background-color: lime
 
-  ul.veggie-list
+  ul.fruit-list
     display: none
     position: fixed
     overflow: auto
@@ -319,7 +320,7 @@ select.query-time
     height: 30%
     border: 2px solid grey
 
-  .btn-submit-veggie-query
+  .btn-submit-fruit-query
     display: none
     button[type*=submit]
       position: fixed
@@ -330,13 +331,13 @@ select.query-time
       background-color: red
       font-size: 14px
 
-  .veggie-list
+  .fruit-list
     label
       display: inline-block
       float: left
       overflow: auto
 
-  #btn-veggie-list
+  #btn-fruit-list
     position: fixed
     bottom: 10%
     left: 0%

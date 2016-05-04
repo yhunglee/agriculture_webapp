@@ -13,6 +13,10 @@ Rails.application.routes.draw do
   get 'aboutus', to: 'vegetables#about_us', as: "aboutus"
   get 'bulletinboard', to: 'vegetables#bulletin_board', as: "bulletinboard"
   get 'trending', to: 'vegetables#trending', as: "trending"
+  get 'fruits/bulletinboard', to: 'fruits#bulletin_board', as: "fruits_bulletinboard"
+  get 'fruits/trending', to: 'fruits#trending', as: "fruits_trending"
+  get 'fruits/aboutus', to: 'fruits#about_us', as: "fruits_aboutus"
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

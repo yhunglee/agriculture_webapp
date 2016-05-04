@@ -29,14 +29,13 @@
 </head>
 <%= content_for :link_category do %>
 <div class="link-category-page">
-	<% if current_page?(controller:  "vegetables", action:  "bulletin_board") %>
-		<%= link_to "Go to fruit version", {controller: "fruits", action: "bulletin_board"}, id: "fruit-bulletinboard-link", class: "fruit-bulletinboard-link" %>
-	<% elsif current_page?(controller: "vegetables", action: "index") %>
-		<%= link_to "Go to fruit version", {controller: "fruits", action: "trending", id: "fruit-trending-link", class: "fruit-trending-link"} %>
+	<% if current_page?(controller: "fruits", action: "bulletin_board") %>
+		<%= link_to "Go to vegetable version", {controller: "vegetables", action: "bulletin_board"}, id: "veggie-bulletinboard-link", class: "veggie-bulletinboard-link" %>
+	<% elsif current_page?(controller: "fruits", action: "trending") %>
+		<%= link_to "Go to vegetable version", {controller: "vegetables", action: "trending"}, id: "veggie-trending-link", class: "veggie-trending-link" %>
 	<% end %>
 </div>
 <% end %>
-
 <%= content_for :title do %>
 	<div id="banner">
 		<a href="<%= root_path %>">
@@ -61,10 +60,10 @@
 			<%= link_to "About us", {controller: "vegetables", action: "about_us"}, id: "about-us", class: "about-us" %>
 		</li>
 		<li class="bulletin-board">
-			<%= link_to "Bulletin Board", {controller: "vegetables", action: "bulletin_board"}, id: "bulletin-board", class: "bulletin-board" %>
+			<%= link_to "Bulletin Board", {controller: "fruits", action: "bulletin_board"}, id: "bulletin-board", class: "bulletin-board" %>
 		</li>
 		<li class="trending">
-			<%= link_to "Trending", {controller: "vegetables", action: "trending"}, id: "trending", class: "trending" %>
+			<%= link_to "Trending", {controller: "fruits", action: "trending"}, id: "trending", class: "trending" %>
 		</li>
 	</ul>
 <% end %>

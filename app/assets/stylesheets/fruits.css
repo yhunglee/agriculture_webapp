@@ -41,6 +41,9 @@ body {
 .col-12 {
   width: 100%; }
 
+.link-category-page {
+  text-align: right; }
+
 .row:after {
   content: "";
   clear: both;
@@ -49,9 +52,6 @@ body {
 [class*=col-] {
   float: left;
   padding: 15px; }
-
-.link-category-page {
-  text-align: right; }
 
 #warning {
   background-color: yellow;
@@ -98,7 +98,7 @@ ul.navi-bar {
         color: while;
         background-color: lime; }
 
-ul.veggie-list {
+ul.fruit-list {
   display: none;
   position: fixed;
   overflow: auto;
@@ -109,9 +109,9 @@ ul.veggie-list {
   height: 80%;
   border: 2px solid grey; }
 
-.btn-submit-veggie-query {
+.btn-submit-fruit-query {
   display: none; }
-  .btn-submit-veggie-query button[type*=submit] {
+  .btn-submit-fruit-query button[type*=submit] {
     position: fixed;
     width: 10%;
     height: 10%;
@@ -120,12 +120,12 @@ ul.veggie-list {
     background-color: red;
     font-size: 12px; }
 
-.veggie-list label {
+.fruit-list label {
   display: inline-block;
   float: left;
   overflow: auto; }
 
-#btn-veggie-list {
+#btn-fruit-list {
   position: fixed;
   bottom: 10%;
   left: 0%;
@@ -134,14 +134,14 @@ ul.veggie-list {
   width: 30%;
   height: 10%;
   opacity: 0.7; }
-  #btn-veggie-list:hover {
+  #btn-fruit-list:hover {
     opacity: 1; }
 
-#query-time {
+#fruit-query-time {
   position: static;
   float: right; }
 
-select.query-time {
+select.fruit-query-time {
   position: static;
   display: block;
   float: right;
@@ -184,7 +184,7 @@ select.query-time {
     .css_tr:hover {
       background-color: LightGreen; }
 
-  ul #btn-veggie-list {
+  ul #btn-fruit-list {
     position: fixed;
     bottom: 10%;
     left: 0%;
@@ -192,7 +192,7 @@ select.query-time {
     width: 10%;
     height: auto;
     opacity: 0.5; }
-    ul #btn-veggie-list:hover {
+    ul #btn-fruit-list:hover {
       opacity: 1; }
 
   ul.navi-bar {
@@ -226,7 +226,7 @@ select.query-time {
           color: white;
           background-color: lime; }
 
-  ul.veggie-list {
+  ul.fruit-list {
     display: none;
     position: fixed;
     overflow: auto;
@@ -237,9 +237,9 @@ select.query-time {
     height: 80%;
     border: 2px solid grey; }
 
-  .btn-submit-veggie-query {
+  .btn-submit-fruit-query {
     display: none; }
-    .btn-submit-veggie-query button[type*=submit] {
+    .btn-submit-fruit-query button[type*=submit] {
       position: fixed;
       width: 20%;
       height: 10%;
@@ -248,12 +248,12 @@ select.query-time {
       background-color: red;
       font-size: 14px; }
 
-  .veggie-list label {
+  .fruit-list label {
     display: inline-block;
     float: left;
     overflow: auto; }
 
-  #btn-veggie-list {
+  #btn-fruit-list {
     position: fixed;
     bottom: 10%;
     left: 0%;
@@ -262,7 +262,7 @@ select.query-time {
     width: 30%;
     height: 10%;
     opacity: 0.7; }
-    #btn-veggie-list:hover {
+    #btn-fruit-list:hover {
       opacity: 1; } }
 @media only screen and (min-width: 768px) {
   #css_table {
@@ -313,7 +313,7 @@ select.query-time {
           color: white;
           background-color: lime; }
 
-  ul.veggie-list {
+  ul.fruit-list {
     display: none;
     position: fixed;
     overflow: auto;
@@ -324,9 +324,9 @@ select.query-time {
     height: 30%;
     border: 2px solid grey; }
 
-  .btn-submit-veggie-query {
+  .btn-submit-fruit-query {
     display: none; }
-    .btn-submit-veggie-query button[type*=submit] {
+    .btn-submit-fruit-query button[type*=submit] {
       position: fixed;
       width: 200px;
       height: 30px;
@@ -335,12 +335,12 @@ select.query-time {
       background-color: red;
       font-size: 14px; }
 
-  .veggie-list label {
+  .fruit-list label {
     display: inline-block;
     float: left;
     overflow: auto; }
 
-  #btn-veggie-list {
+  #btn-fruit-list {
     position: fixed;
     bottom: 10%;
     left: 0%;
@@ -349,7 +349,7 @@ select.query-time {
     width: 200px;
     height: 30px;
     opacity: 0.7; }
-    #btn-veggie-list:hover {
+    #btn-fruit-list:hover {
       opacity: 1; } }
 
-/*# sourceMappingURL=vegetables.css.css.map */
+/*# sourceMappingURL=fruits.css.map */

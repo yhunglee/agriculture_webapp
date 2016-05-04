@@ -1,0 +1,74 @@
+<h1>Bulletin Board</h1>
+<div class="market-query-form">
+	<%= form_tag fruits_bulletinboard_url, :method => 'get', :remote => true do %>
+		<%= text_field_tag "name", params[:name], placeholder: 'Enter item name', autofocus: true, autosave: true %>
+		<%= text_field_tag "code", params[:code], placeholder: 'Enter item code', autosave: true %>
+		<%= text_field_tag "market", params[:market], placeholder: 'Enter market name', autosave: true %>
+		<%= text_field_tag "kind", params[:kind], placeholder: 'Enter kind', autosave: true %>
+		<%= date_field_tag "date", params[:date], placeholder: 'Date format: 1996-01-01', autosave: true, min: '1996-01-01', max: Date.yesterday, step: 1 %>
+		<%= submit_tag "Search", :name => nil %>
+	<% end %>
+</div>
+<div class="display-option">
+	<div class="location">
+		Location
+	</div>
+
+	<div class="middleprice">
+		Middle Price
+	</div>
+
+	<div class="upperprice">
+		Upper Price
+	</div>
+
+	<div class="lowerprice">
+		Lower Price
+	</div>
+
+	<div class="averageprice">
+		Average Price
+	</div>
+
+	<div class="quantity">
+		Quantity
+	</div>
+
+	<div class="kind">
+		Kind
+	</div>
+
+	<div class="processtype">
+		Processing Type
+	</div>
+
+	<div class="date">
+		Date
+	</div>
+</div>
+
+
+<div class="showdata">
+	Carousel show
+	<div class="slideshow">
+		<% i = 0 %>
+		<% @specifiedFruits.each do |element| %>
+			<div class="item-<%= i %>">
+				<div id="name"><%= element.name %></div>
+				<div id="location">Market &nbsp; &#58;<%= element.trade_location %></div>
+				<div id="middleprice">Middle Price &nbsp; &#58;<%= element.middle_price %></div>
+				<div id="upperprice">Upper Price &nbsp; &#58;<%= element.upper_price %></div>
+				<div id="averageprice">Average Price &nbsp; &#58;<%= element.average_price %></div>
+				<div id="lowerprice">Lower price &nbsp; &#58;<%= element.lower_price %></div>
+				<div id="quantity">Quantity &nbsp; &#58;<%= element.trade_quantity %></div>
+				<div id="code">Code &nbsp; &#58;<%= element.code %></div>
+				<div id="kind">Kind &nbsp; &#58;<%= element.kind %></div>
+				<div id="processtype">Process type &nbsp; &#58;<%= element.detail_processing_type %></div>
+				<div id="date">Date &nbsp; &#58;<%= element.transaction_date %></div>
+
+			</div>
+			<% i += 1 %>
+		<% end %>
+        </div>
+</div>
+

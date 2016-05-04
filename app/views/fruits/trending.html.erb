@@ -1,0 +1,88 @@
+<h1> This trending page contains a chart of fruits. </h1>
+
+
+<%= include_gon(:init => true) %>
+<%= form_tag fruits_trending_url, :method => 'get' do %>
+	<p>
+		<%= text_field_tag "query", params["query"], placeholder: 'Enter item name or date' %>
+		<%= submit_tag "Search", :name => nil %>
+	</p>
+<% end %>
+<div id="fruit-chart">
+</div>
+
+<%= if !(@overviewFruits.nil?) then paginate @overviewFruits end %>
+
+<div class="paginate-info">
+	<%= if !(@overviewFruits.nil?) then page_entries_info @overviewFruits end %>
+</div>
+
+<ul class="show-or-hide-fruit-list">
+	 <button type="button" name="btn-fruit-list" id="btn-fruit-list" class="btn-fruit-list">Fruits list
+	</button>
+</ul>
+<ul class="fruit-list">
+	<% counter = 1 %>
+	<%= form_tag fruits_trending_url, {:method => 'get', id: "fruit-query"} do %>
+	<% @fruits.each { |element| %>
+		<label><%= check_box_tag 'query[]', element.name, false, { class: 'fruit-'+ counter.to_s, id: 'fruit-' + counter.to_s }%> <%= element.name %> <%= element.kind %></label>
+		<% counter += 1 %>
+	<% } %>
+        <% end %>
+</ul>
+
+<div class="btn-submit-fruit-query">
+	<button type="submit" name="btn-submit-fruit-query" form="fruit-query">送出查詢</button>
+</div>
+<div id="fruit-query-time">
+	In recent time: 	
+<%= form_tag fruits_trending_url, {:method => 'get', id: 'filter-fruit-query'} do %>
+<select name="query-time" class="fruit-query-time" form="filter-fruit-query">
+        <option value=""> </option>
+	<option value="10">10 Days</option>
+	<option value="30">30 Days</option>
+	<option value="90">3 Months</option>
+	<option value="180">6 Months</option>
+	<option value="365">1 Year</option>
+	<option value="730">2 Years</option>
+	<option value="354">去年農曆同期</option>
+</select>
+<% end %>
+</div>
+
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<!-- agriculture -->
+	<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7376532725341712" data-ad-slot="8676393583" data-ad-format="auto"></ins>
+	<script>
+		(adsbygoogle = window.adsbygoogle || []).push({});
+	</script>
+
+<% if !(@overviewFruits.nil?) then %>
+<div id="css_table">
+	<div class="css_tr"> 
+		<div class="css_td">Name</div> 
+		<div class="css_td">Date</div>
+		<div class="css_td">Code</div>
+		<div class="css_td">Kind</div>
+		<div class="css_td">Total average price(NTD)</div>
+		<div class="css_td">Total transaction quantity</div>
+	</div>
+	<% i = 1 %>
+	<% @overviewFruits.each{ |item| %>
+		<div class="css_tr">
+			<div class="css_td"><div id="itemname-<%= i %>"><%= item.name %></div></div>
+			<div class="css_td"><div id="itemdate-<%= i %>"><%= item.date %></div></div>
+			<div class="css_td"><div id="itemcode-<%= i %>"><%= item.code %></div></div>
+			<div class="css_td"><div id="itemkind-<%= i %>"><%= if(item.kind == "\"\"") then "none" else item.kind end %></div></div>
+			<div class="css_td"><div id="itemtotalaverageprice-<%= i %>"><%= item.total_average_price %></div></div>
+			<div class="css_td"><div id="itemtotaltransactionquantity-<%= i %>"><%= item.total_transaction_quantity %></div></div>
+		</div>	
+		<% i += 1 %>
+	<% } %>
+</div>
+<% end %>
+<div class="paginate-info">
+	<%= if !(@overviewFruits.nil?) then page_entries_info @overviewFruits end %>
+</div>
+<%= if !(@overviewFruits.nil?) then paginate @overviewFruits end %>
+
