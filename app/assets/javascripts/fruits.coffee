@@ -317,8 +317,8 @@ $('.display-option .quantity').click ->
   switch_displayoption_using_id_for_slideshow('#quantity')
 $('.display-option .kind').click ->
   switch_displayoption_using_id_for_slideshow('#kind')
-$('.display-option .processtype').click ->
-  switch_displayoption_using_id_for_slideshow('#processtype')
+$('.display-option .weather').click ->
+  switch_displayoption_using_id_for_slideshow('#weather')
 $('.display-option .date').click ->
   switch_displayoption_using_id_for_slideshow('#date')
 

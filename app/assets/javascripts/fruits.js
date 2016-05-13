@@ -304,8 +304,8 @@
     return switch_displayoption_using_id_for_slideshow('#kind');
   });
 
-  $('.display-option .processtype').click(function() {
-    return switch_displayoption_using_id_for_slideshow('#processtype');
+  $('.display-option .weather').click(function() {
+    return switch_displayoption_using_id_for_slideshow('#weather');
   });
 
   $('.display-option .date').click(function() {
