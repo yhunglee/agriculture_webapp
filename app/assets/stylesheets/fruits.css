@@ -159,7 +159,7 @@ select.fruit-query-time {
   clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 25%, 75% 0);
   -webkit-clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 25%, 75% 0); }
 
-.display-option .location, .display-option .middleprice, .display-option .upperprice, .display-option .lowerprice, .display-option .averageprice, .display-option .quantity, .display-option .kind, .display-option .processtype, .display-option .date {
+.display-option .location, .display-option .middleprice, .display-option .upperprice, .display-option .lowerprice, .display-option .averageprice, .display-option .quantity, .display-option .kind, .display-option .date, .display-option .weather {
   background-color: salmon;
   text-align: right;
   display: inline-block;
