@@ -37,11 +37,14 @@ class FruitsController < VegetablesController
 			# Extract codes from query string
 			arrayOfcodes = Array.new
 			arrayOfnames = Array.new
+
 			arrayOfQuery.each { |item|
 				# filter out codes only. Names and dates(it they exist) will ignore for fields of codes.
 				if( nil != item[/(?<=[\u4E00-\u9FFF])+[a-zA-Z0-9]{2,5}$/u] )
 					arrayOfcodes << item[/(?<=[\u4E00-\u9FFF])+[a-zA-Z0-9]{2,5}$/u]
 					arrayOfnames << item.gsub(arrayOfcodes.last,"")
+				elsif (nil != item[/[0-9\-]+/u])
+					aryOfTimeOfQuery << item
 				else #if (nil != item[/[\u4E00-\u9FFF]+/u])
 					arrayOfnames << item[/[\u4E00-\u9FFF]+/u]
 				end 
@@ -50,7 +53,7 @@ class FruitsController < VegetablesController
 			arrayOfcodes.flatten!
 			# Extract codes from query string
 
-			aryOfTimeOfQuery = arrayOfQuery.grep /[\d]/
+			#aryOfTimeOfQuery = arrayOfQuery.grep /[\d]/
 			arrayOfQuery -= aryOfTimeOfQuery # remove date/number from arrayOfQuery
 			if aryOfTimeOfQuery.empty?
 				aryOfTimeOfQuery = nil # means there is no date/number.
