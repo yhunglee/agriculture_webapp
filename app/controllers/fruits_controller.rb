@@ -30,17 +30,33 @@ class FruitsController < VegetablesController
 			elsif query.kind_of? Array
 				arrayOfQuery += query
 			else
-				return OverviewFruit.all.order(:name, date: :desc).page(params[:page])
+				# Default we use A1 香蕉 as an item for showing trending.
+				return OverviewFruit.where(:code => 'A1').order(:name, date: :desc).page(params[:page]) # use code: A1 香蕉
 			end
+
+			# Extract codes from query string
+			arrayOfcodes = Array.new
+			arrayOfnames = Array.new
+			arrayOfQuery.each { |item|
+				# filter out codes only. Names and dates(it they exist) will ignore for fields of codes.
+				if( nil != item[/(?<=[\u4E00-\u9FFF])+[a-zA-Z0-9]{2,5}$/u] )
+					arrayOfcodes << item[/(?<=[\u4E00-\u9FFF])+[a-zA-Z0-9]{2,5}$/u]
+					arrayOfnames << item.gsub(arrayOfcodes.last,"")
+				else #if (nil != item[/[\u4E00-\u9FFF]+/u])
+					arrayOfnames << item[/[\u4E00-\u9FFF]+/u]
+				end 
+
+			}
+			arrayOfcodes.flatten!
+			# Extract codes from query string
 
 			aryOfTimeOfQuery = arrayOfQuery.grep /[\d]/
 			arrayOfQuery -= aryOfTimeOfQuery # remove date/number from arrayOfQuery
 			if aryOfTimeOfQuery.empty?
 				aryOfTimeOfQuery = nil # means there is no date/number.
 			else
-				aryOfTimeOfQuery.mp!{ |element|
+				aryOfTimeOfQuery.map!{ |element|
 					begin # Date.parse(element) check whether date format of the element is right or not
-						logger.debug element #debug
 						if element.length > 4
 							if element.length == 6 # format: YYYYMM
 								element += "01"
@@ -73,15 +89,15 @@ class FruitsController < VegetablesController
 						end
 						#date.parse(element) check whether format of the element is right or not
 					rescue ArgumentError
-						puts "Invalid date."
+						#puts "Invalid date."
 						element = nil
 						flash.now[:error] = "Invalid date."
-						return OverviewFruit.where(:name => arrayOfQuery).order(:name, date: :desc).page(params[:page])
+						return OverviewFruit.where(:name => arrayOfnames, :code => arrayOfcodes).order(:name, date: :desc).page(params[:page])
 					rescue DateformatError
 						#puts "Error date format."
 						element = nil
 						flash.now[:warning] = "Error date format."
-						return OverviewFruit.where(:name => arrayOfQuery).order(:name, date: :desc).page(params[:page])
+						return OverviewFruit.where(:name => arrayOfnames, :code => arrayOfcodes).order(:name, date: :desc).page(params[:page])
 					end 
 				}
 				if aryOfTimeOfQuery.include? nil # Error handling for arrayOfQuery.grep(/[\d]/) containing Fixnum. May be a dead code due to handle nothing
@@ -94,12 +110,12 @@ class FruitsController < VegetablesController
 			periodRange = Array.new([10,30,90,180,354,365,730]) # same values with ones of select options in app/views/fruits/trending.html.erb
 			if timeFilter && !(timeFilter.empty?)
 				if queryPeriod > 0 && periodRange.include?(queryPeriod)
-					conditions = Hash[{date: (queryPeriod.days.ago..Date.today), name: arrayOfQuery}.select{|k,v| v.present?}]
+					conditions = Hash[{date: (queryPeriod.days.ago..Date.today), name: arrayOfnames, code: arrayOfcodes}.select{|k,v| v.present?}]
 				else
-					conditions = Hash[{date: aryOfTimeOfQuery, name: arrayOfQuery}.select{|k,v| v.present?}]
+					conditions = Hash[{date: aryOfTimeOfQuery, name: arrayOfnames, code: arrayOfcodes}.select{|k,v| v.present?}]
 				end
 			else
-				conditions = Hash[{date: aryOfTimeOfQuery, name: arrayOfQuery}.select{|k,v| v.present?}]
+				conditions = Hash[{date: aryOfTimeOfQuery, name: arrayOfnames, code: arrayOfcodes}.select{|k,v| v.present?}]
 			end
 			OverviewFruit.where(conditions).order('date DESC', :name).page(params[:page])
 		end
