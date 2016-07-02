@@ -12,3 +12,6 @@
 * Use ubuntu 14.04 LTS and 1GB RAM at least.
 * Modify config/deploy.rb to meet your deploy instructions.
 
+## Demo site   
+* The demo site is at http://agriculture.csie.io    
+
