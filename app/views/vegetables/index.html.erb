@@ -25,7 +25,7 @@
 	<% counter = 1 %>
 	<%= form_tag root_url, {:method => 'get', id: "veggie-query"} do %>
 	<% @vegetables.each { |element| %>
-		<label><%= check_box_tag 'query[]', element.name, false, { class: 'veggie-'+ counter.to_s, id: 'veggie-' + counter.to_s }%> <%= element.name %></label>
+		<label><%= check_box_tag 'query[]', element.name+element.code, false, { class: 'veggie-'+ counter.to_s, id: 'veggie-' + counter.to_s }%> <%= element.name %></label>
 		<% counter += 1 %>
 	<% } %>
         <% end %>
