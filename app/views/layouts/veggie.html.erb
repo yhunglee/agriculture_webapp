@@ -23,7 +23,6 @@
 	<%= favicon_link_tag 'apple-touch-icon-83.5@2x.png', rel: 'apple-touch-icon', type: "image/png" %>
 	<%= favicon_link_tag 'apple-touch-icon-83.5@2x.png', rel: 'apple-touch-icon-precomposed', type: "image/png" %>
 	<%= favicon_link_tag 'Android192x192.png', rel: 'icon', type: "image/png" %>
-  	<%= stylesheet_link_tag    'application', media: 'print', 'data-turbolinks-track' => true %>
   	<%= csrf_meta_tags %>
 	<title>AgricultureWebapp</title>
 </head>
@@ -104,4 +103,4 @@
 <%= javascript_include_tag 'application', 'data-turbolinks-track' => true, async: Rails.env.production?, cache: Rails.env.production? %>
 </body>
 </html>
-
+<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
