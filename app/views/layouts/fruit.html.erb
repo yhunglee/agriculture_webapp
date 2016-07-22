@@ -100,7 +100,7 @@
 <%= yield :link_category %>
 <%= yield %>
 
-<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+<%= javascript_include_tag 'application', 'data-turbolinks-track' => true , async: Rails.env.production? , cache: Rails.env.production? %>
 </body>
 </html>
 
