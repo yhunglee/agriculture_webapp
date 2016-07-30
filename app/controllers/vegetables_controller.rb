@@ -32,12 +32,25 @@ class VegetablesController < ApplicationController
 	def extractCodeFromQuery(arrayOfQuery)
 
 		codeArray = Array.new
+		nameArray = Array.new
 		arrayOfQuery.map!{ | element|
-			if( nil != element[/(?<=[\u4E00-\u9FFF])+[A-Za-z0-9]{2,5}$/u] )
-				codeArray << element[/(?<=[\u4E00-\u9FFF])+[A-Za-z0-9]{2,5}$/u]
-				element.sub!(/(?<=[\u4E00-\u9FFF])+[A-Za-z0-9]{2,5}/u,"")
+			if( nil != element[/(?<=[\(\)\u4E00-\u9FFF])+[A-Za-z0-9]{2,5}$/u] )
+				codeArray << element[/(?<=[\(\)\u4E00-\u9FFF])+[A-Za-z0-9]{2,5}$/u]
+				#element.sub!(/(?<=[\(\)\u4E00-\u9FFF])+[A-Za-z0-9]{2,5}/u,"")
+			end 
+			if( nil != element[/[\(\)\u4E00-\u9FFF]+(?=[ A-Za-z0-9]?)$/u])
+				nameArray << element[/[\(\)\u4E00-\u9FFF]+(?=[ A-Za-z0-9]?)$/u]
+				#element.sub!(/[\(\)\u4E00-\u9FFF]+(?=[ A-Za-z0-9]?)$/u,"")
 			end 
 		}
+
+		records = Vegetable.where({name: nameArray}).order(:name).pluck(:code)
+		if( false == ( records.any? { |record| codeArray.include?(record.code) } ) )
+			records.each{ |record|
+				codeArray << record.code
+			}
+		end 
+
 		return arrayOfQuery, codeArray
 	end 
 
@@ -110,14 +123,14 @@ class VegetablesController < ApplicationController
 			if queryPeriod > 0 && periodRange.include?(queryPeriod)
 
 				#conditions = Hash[{date: (queryPeriod.days.ago..Date.today) , name: arrayOfQuery}.select{|k,v| v.present?}]
-				conditions = Hash[{date: (queryPeriod.days.ago..Date.today) , code: arrayOfcodes, name: arrayOfQuery}.select{|k,v| v.present?}]
+				conditions = Hash[{date: (queryPeriod.days.ago..Date.today) , code: arrayOfcodes}.select{|k,v| v.present?}]
 			else 
 				#conditions = Hash[{date: timeOfQuery, name: arrayOfQuery}.select{|k,v| v.present?}]
-				conditions = Hash[{date: timeOfQuery, code: arrayOfcodes, name: arrayOfQuery}.select{|k,v| v.present?}]
+				conditions = Hash[{date: timeOfQuery, code: arrayOfcodes}.select{|k,v| v.present?}]
 			end 
 		else 
 			#conditions = Hash[{date: timeOfQuery, name: arrayOfQuery}.select{|k,v| v.present?}]
-			conditions = Hash[{date: timeOfQuery, code: arrayOfcodes, name: arrayOfQuery}.select{|k,v| v.present?}]
+			conditions = Hash[{date: timeOfQuery, code: arrayOfcodes}.select{|k,v| v.present?}]
 		end
 
 		return conditions 	
