@@ -33,7 +33,7 @@ class VegetablesController < ApplicationController
 
 		codeArray = Array.new
 		nameArray = Array.new
-		arrayOfQuery.map!{ | element|
+		arrayOfQuery.map{ | element|
 			if( nil != element[/(?<=[\(\)\u4E00-\u9FFF])+[A-Za-z0-9]{2,5}$/u] )
 				codeArray << element[/(?<=[\(\)\u4E00-\u9FFF])+[A-Za-z0-9]{2,5}$/u]
 				#element.sub!(/(?<=[\(\)\u4E00-\u9FFF])+[A-Za-z0-9]{2,5}/u,"")
@@ -55,14 +55,15 @@ class VegetablesController < ApplicationController
 	end 
 
 	def extractTimeFromQuery(arrayOfQuery)
-	
-		timeOfQuery = arrayOfQuery.grep /[\d]/
+
+		timeOfQuery = arrayOfQuery.grep /[\d]{4,}[\d\-]*/u
+
 		if timeOfQuery.empty?
 			timeOfQuery = nil
 		else
 			timeOfQuery.map!{ | element |
 				begin # Date.parse(element) check whether date format of the element is right or not
-					logger.debug element #debug
+					#logger.debug element #debug
 					if element.length > 4
 						
 						if element.length == 6 # format: YYYYMM
@@ -93,12 +94,12 @@ class VegetablesController < ApplicationController
 					end 
 					#Date.parse(element)  check whether date format of the element is right or not
 				rescue ArgumentError
-					puts "Invalid date."
+					logger.error "Invalid date."
 					element = nil
 					flash.now[:error] = "Invalid date."
 					return OverviewVegetable.where(:name => arrayOfQuery).order(:name, date: :desc).page(params[:page])
 				rescue DateformatError
-					#puts "Error date format."
+					logger.error "Error date format."
 					element = nil
 					flash.now[:warning] = "Error date format."
 					return OverviewVegetable.where(:name => arrayOfQuery).order(:name, date: :desc).page(params[:page])
