@@ -45,9 +45,9 @@ class VegetablesController < ApplicationController
 		}
 
 		records = Vegetable.where({name: nameArray}).order(:name).pluck(:code)
-		if( false == ( records.any? { |record| codeArray.include?(record.code) } ) )
+		if( false == ( records.any? { |record| codeArray.include?(record) } ) )
 			records.each{ |record|
-				codeArray << record.code
+				codeArray << record
 			}
 		end 
 
