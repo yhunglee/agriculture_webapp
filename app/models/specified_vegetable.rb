@@ -1,4 +1,4 @@
-class SpecifiedVegetable < ActiveRecord::Base
+class SpecifiedVegetable < ApplicationRecord
 	self.table_name = "specified_vegetable"
 	paginates_per 36
 

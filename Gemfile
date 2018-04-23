@@ -57,6 +57,12 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+# Use byebug in rails 5
+group :development, :test do
+	gem 'byebug'
+end
+
 gem 'grape', '~> 0.10'
 # Print routes of grape apis via command: rake routes 
 gem 'grape-rails-routes' # Load routes that grape provides.
@@ -80,4 +86,14 @@ gem 'wine_bouncer', '~> 0.5.1' # A Ruby gem that allows Oauth2 protection with D
 gem 'd3-rails' # For present data-visualization
 gem 'c3-rails' # For simplifying data-visualization of d3js
 gem 'gon' # For passing data from rails to javascript
+
+
+
+# gem rails-controller-testing 
+# from guide of upgradeing rails 4.2 to rails 5.0: Extraction of some helper methods to rails-controller-testing
+gem 'rails-controller-testing'
+
+# gem activemodel-serializers-xml
+# from guide of upgradeing rails 4.2 to rails 5.0: XML Serialization
+gem 'activemodel-serializers-xml'
 

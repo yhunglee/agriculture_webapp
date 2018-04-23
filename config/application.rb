@@ -29,5 +29,26 @@ module AgricultureWebapp
     # configuration to your config/application.rb:
     config.active_record.raise_in_transactional_callbacks = true
 
+    # Halting Callback Chains via throw(:abort) from guide of upgrading Rails 4.2 to Rails 5.0
+    ActiveSupport.halt_callback_chains_on_return_false = false
+
+    # Active Record belongs_to Required by Default Option from guide of upgrading Rails 4.2 to Rails 5.0
+    config.active_record.belongs_to_required_by_default = true
+
+    # Per-form CSRF Tokens from guide of upgrading Rails 4.2 to Rails 5.0
+    config.action_controller.per_form_csrf_tokens = true
+
+    # Forgery Protection with Origin Check from guide of upgrading Rails 4.2 to Rails 5.0
+    config.action_controller.forgery_protection_origin_check = true
+
+    # Support Fragment Caching in Action Mailer Views from guide of upgrading Rails 4.2 to Rails 5.0
+    config.action_mailer.perform_caching = true
+
+    # Configure SSL Options to Enable HSTS with Subdomains from guide of upgrading Rails 4.2 to Rails 5.0
+    config.ssl_options = { hsts: { subdomains: true } }
+
+    # Preserve Timezone of the Receiver from guide of upgrading Rails 4.2 to Rails 5.0
+    ActiveSupport.to_time_preserves_timezone = true
+
   end
 end

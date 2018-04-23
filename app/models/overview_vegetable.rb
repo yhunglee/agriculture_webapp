@@ -1,4 +1,4 @@
-class OverviewVegetable < ActiveRecord::Base
+class OverviewVegetable < ApplicationRecord
 	self.table_name = "overview_vegetable"
 	paginates_per 50
 	

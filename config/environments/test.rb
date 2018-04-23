@@ -4,7 +4,7 @@ Rails.application.configure do
   # active_support.test_order is used for Rails 4.2 and aboved versions. It has values of 
   # :sorted and :random. :random is used as default value when rails version is 5 and aboved.
   # We can choose to stay in :sorted or to :random in rails 5.
-  config.active_support.test_order = :sorted 
+  config.active_support.test_order = :random 
 
   # The test environment is used exclusively to run your application's
   # test suite. You never need to work with it otherwise. Remember that
