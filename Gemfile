@@ -84,7 +84,7 @@ gem 'wine_bouncer', '~> 1.0' # A Ruby gem that allows Oauth2 protection with Doo
 
 
 #gem 'd3js-rails' # For present data-visualization
-gem 'd3-rails' # For present data-visualization
+gem 'd3-rails', '~> 3.5.16' # For present data-visualization
 gem 'c3-rails' # For simplifying data-visualization of d3js
 gem 'gon' # For passing data from rails to javascript
 
