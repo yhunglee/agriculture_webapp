@@ -1,4 +1,4 @@
-class AddIndexSettingToSpecifiedVegetable < ActiveRecord::Migration
+class AddIndexSettingToSpecifiedVegetable < ActiveRecord::Migration[5.2]
   def change
 	  add_index "specified_vegetable", [:name, :code, "transaction_date"]
 	  add_index "specified_vegetable", "trade_location"

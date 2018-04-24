@@ -1,4 +1,4 @@
-class AddTsvToOverviewVegetable < ActiveRecord::Migration
+class AddTsvToOverviewVegetable < ActiveRecord::Migration[5.2]
 	def up
 		add_column "overview_vegetable", :tsv, :tsvector
 		add_index "overview_vegetable", :tsv, using: "gin"

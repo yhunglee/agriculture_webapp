@@ -1,4 +1,4 @@
-class CreateOverviewFruits < ActiveRecord::Migration
+class CreateOverviewFruits < ActiveRecord::Migration[5.2]
   def change
     create_table :overview_fruit do |t|
       t.string :name, null: false
