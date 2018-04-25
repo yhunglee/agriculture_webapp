@@ -1,4 +1,4 @@
-class CreateSpecifiedFruits < ActiveRecord::Migration
+class CreateSpecifiedFruits < ActiveRecord::Migration[5.2]
   def change
     create_table :specified_fruit do |t|
       t.string :name, null: false

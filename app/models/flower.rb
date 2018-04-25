@@ -1,2 +1,2 @@
-class Flower < ActiveRecord::Base
+class Flower < ApplicationRecord
 end

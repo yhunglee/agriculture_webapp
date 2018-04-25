@@ -34,7 +34,7 @@ set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads')
 
 # Remote server using rvm
-set :rvm_ruby_version, '2.3.0'
+set :rvm_ruby_version, '2.4.1'
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
@@ -62,5 +62,14 @@ namespace :deploy do
 #	    end
  #   end
  # end 
+
+ # If you want to restart using `passenger-config restart-app`, add this to your config/deploy.rb,
+ # set :passenger_restart_with_touch, false # Note that `nil` is NOT the same as `false` here
+ set :passenger_restart_with_touch, false
+
+ # If you are installing passenger during your deployment AND you want to restart using `passenger-config restart-app`,
+ # you need to set `:passenger_in_gemfile` to `true` in your `config/deploy.rb`.
+ set :passenger_in_gemfile, true
+
 
 end

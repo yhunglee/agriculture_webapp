@@ -1,2 +1,2 @@
-class Fruit < ActiveRecord::Base
+class Fruit < ApplicationRecord
 end

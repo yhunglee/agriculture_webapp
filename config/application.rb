@@ -22,12 +22,24 @@ module AgricultureWebapp
     config.paths.add File.join('app', 'controllers', 'api'), glob: File.join('**', '*.rb')
     config.autoload_paths += Dir[Rails.root.join('app','controllers','api', '*')]
 
-    # Error handling in transaction callbacks:
-    # When you define a after_rollback or after_commit callback, you will receive a 
-    # deprecation warning about this upcoming change. When you are ready, you can 
-    # opt into the new behavior and remove the deprecation warning by adding following
-    # configuration to your config/application.rb:
-    config.active_record.raise_in_transactional_callbacks = true
+    
 
+    # Active Record belongs_to Required by Default Option from guide of upgrading Rails 4.2 to Rails 5.0
+    config.active_record.belongs_to_required_by_default = true
+
+    # Per-form CSRF Tokens from guide of upgrading Rails 4.2 to Rails 5.0
+    config.action_controller.per_form_csrf_tokens = true
+
+    # Forgery Protection with Origin Check from guide of upgrading Rails 4.2 to Rails 5.0
+    config.action_controller.forgery_protection_origin_check = true
+
+    # Support Fragment Caching in Action Mailer Views from guide of upgrading Rails 4.2 to Rails 5.0
+    config.action_mailer.perform_caching = true
+
+    # Configure SSL Options to Enable HSTS with Subdomains from guide of upgrading Rails 4.2 to Rails 5.0
+    config.ssl_options = { hsts: { subdomains: true } }
+
+    # Halting Callback Chains via throw(:abort) from guide of upgrading Rails 4.2 to Rails 5.0
+    config.active_support.halt_callback_chains_on_return_false = false
   end
 end

@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.2.5.1'
+gem 'rails', '~> 5.2.0'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use SCSS for stylesheets
@@ -16,14 +16,14 @@ gem 'coffee-rails'
 
 # Include web-console gem for Rails 4.2.5.1
 group :development do
-	gem 'web-console', '~> 2.0'
+    gem 'web-console', '~> 3.6'
 end 
 
 # Include rails-html-sanitizer for Rails 4.2.5 and aboved version
 gem 'rails-html-sanitizer' 
 
 # Include responders for Rails 4.2.5.1 and aboved version
-gem 'responders', '~> 2.0'
+gem 'responders', '~> 2.4'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -57,7 +57,13 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-gem 'grape', '~> 0.10'
+
+# Use byebug in rails 5
+group :development, :test do
+	gem 'byebug'
+end
+
+gem 'grape', '~> 1.0'
 # Print routes of grape apis via command: rake routes 
 gem 'grape-rails-routes' # Load routes that grape provides.
 gem 'grape-kaminari' # for api inqueries pagination
@@ -73,11 +79,22 @@ gem 'recaptcha', require: "recaptcha/rails" # validate whether user is a robot o
 gem 'dotenv-rails', :groups => [:development, :test] # load values of ENV. We only use it with recaptcha gem in development and test environment.
 
 gem 'kaminari' # for web pages pagination
-gem 'wine_bouncer', '~> 0.5.1' # A Ruby gem that allows Oauth2 protection with Doorkeeper for Grape Api's
+gem 'kaminari-grape' 
+gem 'wine_bouncer', '~> 1.0' # A Ruby gem that allows Oauth2 protection with Doorkeeper for Grape Api's
 
 
 #gem 'd3js-rails' # For present data-visualization
-gem 'd3-rails' # For present data-visualization
+gem 'd3-rails', '~> 3.5.16' # For present data-visualization
 gem 'c3-rails' # For simplifying data-visualization of d3js
 gem 'gon' # For passing data from rails to javascript
+
+
+
+# gem rails-controller-testing 
+# from guide of upgradeing rails 4.2 to rails 5.0: Extraction of some helper methods to rails-controller-testing
+gem 'rails-controller-testing'
+
+# gem activemodel-serializers-xml
+# from guide of upgradeing rails 4.2 to rails 5.0: XML Serialization
+gem 'activemodel-serializers-xml'
 
