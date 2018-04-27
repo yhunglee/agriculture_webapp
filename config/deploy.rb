@@ -1,5 +1,5 @@
 # config valid only for current version of Capistrano
-lock '3.4.0'
+lock '3.10.2'
 
 set :application, 'agriculture_webapp'
 set :repo_url, 'git@github.com:yhunglee/agriculture_webapp.git'
@@ -12,9 +12,13 @@ set :passenger_restart_with_touch, true
 # set :deploy_to, '/var/www/my_app_name'
 set :deploy_to, '/var/www/agriculture_webapp'
 
+# set :default_environment, {
+#   'PATH' => "#{deploy_to}/bin:$PATH",
+#   'GEM_HOME' => "#{deploy_to}/gems"
+# }
+
 # Default value for :scm is :git
 # set :scm, :git
-set :scm, :git
 
 # Default value for :format is :pretty
 # set :format, :pretty
@@ -33,8 +37,12 @@ set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/
 # set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads')
 
+# Set rvm type
+#set :rvm_type, :user
+set :rvm_custom_path, '/usr/share/rvm'
+
 # Remote server using rvm
-set :rvm_ruby_version, '2.4.1'
+set :rvm_ruby_version, '2.4.1@rails5.2.0'
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
@@ -71,5 +79,5 @@ namespace :deploy do
  # you need to set `:passenger_in_gemfile` to `true` in your `config/deploy.rb`.
  set :passenger_in_gemfile, true
 
-
+ 
 end

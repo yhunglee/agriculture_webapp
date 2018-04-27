@@ -98,3 +98,5 @@ gem 'rails-controller-testing'
 # from guide of upgradeing rails 4.2 to rails 5.0: XML Serialization
 gem 'activemodel-serializers-xml'
 
+# gem passenger for application server
+gem 'passenger'
