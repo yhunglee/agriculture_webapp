@@ -3,7 +3,6 @@ lock '3.10.2'
 
 set :application, 'agriculture_webapp'
 set :repo_url, 'git@github.com:yhunglee/agriculture_webapp.git'
-set :passenger_restart_with_touch, true
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -39,7 +38,7 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 
 # Set rvm type
 #set :rvm_type, :user
-set :rvm_custom_path, '/usr/share/rvm'
+set :rvm_custom_path, '/usr/local/rvm'
 
 # Remote server using rvm
 set :rvm_ruby_version, '2.4.1@rails5.2.0'
@@ -74,6 +73,9 @@ namespace :deploy do
  # If you want to restart using `passenger-config restart-app`, add this to your config/deploy.rb,
  # set :passenger_restart_with_touch, false # Note that `nil` is NOT the same as `false` here
  set :passenger_restart_with_touch, false
+
+ # Fix restart passenger app error when cap production deploy
+ set :passenger_restart_command, '-i passenger-config restart-app'
 
  # If you are installing passenger during your deployment AND you want to restart using `passenger-config restart-app`,
  # you need to set `:passenger_in_gemfile` to `true` in your `config/deploy.rb`.
