@@ -42,8 +42,8 @@ gem 'spring',        group: :development
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-# Use unicorn as the app server
-# gem 'unicorn'
+# Use puma as the app server
+gem 'puma'
 
 # Use Capistrano for deployment
 group :development do 
@@ -76,7 +76,7 @@ gem 'rspec-rails' # Testing rails
 gem 'doorkeeper' # OAuth provider
 gem 'devise' # User management
 gem 'recaptcha', require: "recaptcha/rails" # validate whether user is a robot or not when it try to sign up
-gem 'dotenv-rails', :groups => [:development, :test] # load values of ENV. We only use it with recaptcha gem in development and test environment.
+gem 'dotenv-rails' #, :groups => [:development, :test] # load values of ENV. We only use it with recaptcha gem in development and test environment.
 
 gem 'kaminari' # for web pages pagination
 gem 'kaminari-grape' 
