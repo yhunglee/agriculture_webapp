@@ -1,0 +1,38 @@
+FROM starefossen/ruby-node:2-10 AS passenger_ruby
+
+LABEL maintainer="howard@csie.io"
+
+
+LABEL Name=agriculture-webapp Version=0.0.1
+
+# Default Environment
+ENV APACHE_VERSION 2.4.7
+
+EXPOSE 3000
+
+# Requirement
+RUN apt-get update -qq && apt-get install -y build-essential libpq-dev libpcap-dev libssl-dev
+
+
+# === Rails Application
+# FROM AS
+FROM passenger_ruby
+
+# locale for unicode
+ENV LC_ALL C.UTF-8
+# timezone
+ENV TZ Asia/Taipei
+
+
+# throw errors if Gemfile has been modified since Gemfile.lock
+RUN bundle config --global frozen 1
+
+# Set Rails to run in development
+ENV RAILS_ENV development 
+ENV RACK_ENV development
+
+WORKDIR /app
+COPY Gemfile Gemfile.lock ./
+RUN bundle install
+
+COPY . /app
