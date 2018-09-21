@@ -12,9 +12,6 @@ ENV APACHE_VERSION 2.4.7
 RUN apt-get update -qq && apt-get install -y build-essential libpq-dev libpcap-dev libssl-dev
 
 
-# Passenger gem for production
-#RUN gem install passenger -v $PASSENGER_VERSION
-
 # === Rails Application
 # FROM AS
 FROM passenger_ruby
